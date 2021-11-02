@@ -1,9 +1,11 @@
 <template>
   <div>
     <b-navbar class="fixed-top" toggleable="lg" type="light" variant="light">
-      <b-icon  icon = "house-door" class="mr-2 d-none d-xl-block d-xxl-block"></b-icon>
-      <b-navbar-brand href="#" class="d-none d-xl-block d-xxl-block mb-1">Tienda CellPhone</b-navbar-brand>
       
+      <b-navbar-brand href="#" class="d-none d-xl-block d-xxl-block mb-1">
+        <b-icon  icon = "house-door" class="mr-3 d-none d-xl-block d-xxl-block iconPrincipal text-success"></b-icon>
+      </b-navbar-brand>
+      <label class="mt-1 mr-2 labelPrincipal">Tienda CellPhone</label>
       <b-nav-form class="control-form ml-1">
         <b-icon  icon = "search" class="iconBuscar mb-1"></b-icon>
         <b-form-input
@@ -60,9 +62,21 @@ export default {};
      position: absolute;
      left: 10px;
  }
+
  .input-buscar{
      text-indent: 22px;
      max-width: 13rem ;
      margin-right: 10px;
  }
+
+.iconPrincipal{
+  font-size: 2rem;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.labelPrincipal{
+  font-weight: bold;
+}
+
 </style>
