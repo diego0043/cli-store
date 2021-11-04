@@ -2,22 +2,26 @@
   <div>
     <!-- Agregar todo lo restante aca -->
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-3">
+      <b-row>
+        <b-col cols="3">
           <left-menu></left-menu>
-        </div>
-        <div class="col"></div>
-      </div>
+        </b-col>
+        <b-col>
+          <contenedor-cards></contenedor-cards>
+        </b-col>
+      </b-row>
     </div>
   </div>
 </template>
 
 <script>
 import LeftMenu from "./LeftMenu.vue";
+import ContenedorCards from './ContenedorCards.vue'
 export default {
   name: "ContainerPrincipal",
   components: {
     LeftMenu,
+    ContenedorCards
   },
 };
 </script>

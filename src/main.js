@@ -8,6 +8,8 @@ import { firestorePlugin } from 'vuefire'
 //Agregando iconos de bootstrap
 import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
 
+import router from './router'
+
 Vue.use(BootstrapVue)
 Vue.use(BootstrapVueIcons)
 
@@ -16,5 +18,6 @@ Vue.use(firestorePlugin)
 Vue.config.productionTip = false
 
 new Vue({
-  render: h => h(App),
+  router,
+  render: h => h(App)
 }).$mount('#app')

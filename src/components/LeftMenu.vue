@@ -1,97 +1,107 @@
 <template>
   <div>
-    <div class="container mt-4 overflow-auto menuIzquierdo">
-      <b-list-group class="mb-2">
+    <div
+      class="
+        container
+        mt-4
+        overflow-auto
+        menuIzquierdo
+        d-none d-xl-block d-xxl-block
+      "
+    >
+      <b-container class="mb-2">
+        <b-form-checkbox class="m-0" switch size="lg">Nuevo</b-form-checkbox>
+      </b-container>
+
+      <label for="marca" class="mb-1">Marca</label>
+      <b-list-group class="mb-2" id="marca">
         <b-list-group-item
           class="d-flex justify-content-between align-items-center"
         >
-          Cras justo odio
+          Samsung
           <b-badge variant="primary" pill>14</b-badge>
         </b-list-group-item>
 
         <b-list-group-item
           class="d-flex justify-content-between align-items-center"
         >
-          Dapibus ac facilisis in
+          Huawei
           <b-badge variant="primary" pill>2</b-badge>
         </b-list-group-item>
 
         <b-list-group-item
           class="d-flex justify-content-between align-items-center"
         >
-          Morbi leo risus
+          Nokia
           <b-badge variant="primary" pill>1</b-badge>
         </b-list-group-item>
-      </b-list-group>
 
-      <b-list-group class="mb-2">
         <b-list-group-item
           class="d-flex justify-content-between align-items-center"
         >
-          Cras justo odio
+          iPhone
           <b-badge variant="primary" pill>14</b-badge>
         </b-list-group-item>
 
         <b-list-group-item
           class="d-flex justify-content-between align-items-center"
         >
-          Dapibus ac facilisis in
-          <b-badge variant="primary" pill>2</b-badge>
-        </b-list-group-item>
-
-        <b-list-group-item
-          class="d-flex justify-content-between align-items-center"
-        >
-          Morbi leo risus
-          <b-badge variant="primary" pill>1</b-badge>
+          Xiaomi
+          <b-badge variant="primary" pill>14</b-badge>
         </b-list-group-item>
       </b-list-group>
 
+
+      <label for="marca" class="mb-2">Sistema</label>
       <b-list-group class="mb-2">
         <b-list-group-item
           class="d-flex justify-content-between align-items-center"
         >
-          Cras justo odio
+          Android
           <b-badge variant="primary" pill>14</b-badge>
         </b-list-group-item>
 
         <b-list-group-item
           class="d-flex justify-content-between align-items-center"
         >
-          Dapibus ac facilisis in
+          Windows
           <b-badge variant="primary" pill>2</b-badge>
         </b-list-group-item>
 
         <b-list-group-item
           class="d-flex justify-content-between align-items-center"
         >
-          Morbi leo risus
+          ios
           <b-badge variant="primary" pill>1</b-badge>
         </b-list-group-item>
       </b-list-group>
 
+
+      <label for="marca" class="mb-2">Pantalla</label>
       <b-list-group class="mb-2">
         <b-list-group-item
           class="d-flex justify-content-between align-items-center"
         >
-          Cras justo odio
+          6.0
           <b-badge variant="primary" pill>14</b-badge>
         </b-list-group-item>
 
         <b-list-group-item
           class="d-flex justify-content-between align-items-center"
         >
-          Dapibus ac facilisis in
+          5.5
           <b-badge variant="primary" pill>2</b-badge>
         </b-list-group-item>
 
         <b-list-group-item
           class="d-flex justify-content-between align-items-center"
         >
-          Morbi leo risus
+          5
           <b-badge variant="primary" pill>1</b-badge>
         </b-list-group-item>
       </b-list-group>
+
+      
     </div>
   </div>
 </template>
@@ -101,12 +111,10 @@ export default {};
 </script>
 
 <style scoped>
-.menuIzquierdo{
-    height: 80vh;
-    width: 300px;
-    scroll-behavior: smooth;
+.menuIzquierdo {
+  height: 85vh;
+  width: 300px;
+  scroll-behavior: smooth;
+  position: fixed;
 }
-
-
-
 </style>
