@@ -1,13 +1,13 @@
 <template>
-  <div>
+  <b-container>
     <navbar></navbar>
     <new-producto></new-producto>
-  </div>
+  </b-container>
 </template>
 
 <script>
 import Navbar from '../components/Navbar.vue'
-import NewProducto from '../components/NewProducto.vue'
+import NewProducto from '../components/NewProductoC.vue'
 export default {
   name: 'NewProduct',
   
