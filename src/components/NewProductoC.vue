@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid contenedor">
+  <div class="p-3 contenedor">
     <!-- Titulo-->
     <b-row>
       <h1 class="mt-4 h1 centrado">Agregemos unas imagenes</h1>
@@ -8,7 +8,6 @@
     <!-- carousel y svg-->
     <b-row>
       <b-col cols="8">
-
         <b-row class="container-fluid">
           <!-- carousel-->
 
@@ -17,21 +16,15 @@
           </b-col>
 
           <!-- table-->
-          <b-col class="mt-2 ml-4 pt-4 mb-2">
-            <b-table hover :items="items" :fields="fields" class="mr-4">
-              <template #cell(show_details)="row">
-                <b-button size="sm" class="mr-2">
-                  Eliminar
-                </b-button>
-
-                <!-- As `row.showDetails` is one-way, we call the toggleDetails function on @change -->
-                <b-form-checkbox v-model="row.detailsShowing" @change="row.toggleDetails">
-                  Details via check
-                </b-form-checkbox>
-              </template>
-              
-            
-            </b-table>
+          <b-col>
+            <b-row>
+              <b-col class="mt-2 ml-4 pt-4 mb-2">
+                <b-table hover :items="items" class="mr-4"> </b-table>
+              </b-col>
+              <b-col v-if="contador === 3" class="ml-4">
+                <h6 class="text-danger">''Maximo 3 imagenes por anuncio''</h6>
+              </b-col>
+            </b-row>
           </b-col>
         </b-row>
       </b-col>
@@ -42,22 +35,35 @@
     </b-row>
 
     <b-row>
-
       <b-col cols="5" class="mb-2">
         <b-form-file
+          accept="image/*"
           v-model="file1"
           :state="Boolean(file1)"
-          placeholder="Selecciona una imagen..."
+          placeholder="Ninguna imagen seleccionada"
           drop-placeholder="Suelta la imagen..."
         ></b-form-file>
       </b-col>
-      <b-col cols="2" class="mb-2">
-        <b-button variant="outline-success">
+      <b-col cols="5" class="mb-2">
+        <b-button
+          :disabled="contador === 3"
+          @click="agregarImagen()"
+          variant="outline-success"
+          class="mr-3"
+        >
           <b-icon icon="cloud-upload"></b-icon>
-          Subir Foto
+          Subir imagen
+        </b-button>
+
+        <b-button
+          @click="eliminarImagen()"
+          variant="outline-danger"
+          class="mr-5"
+        >
+          <b-icon icon="trash-fill"></b-icon>
+          Eliminar imagen
         </b-button>
       </b-col>
-
     </b-row>
   </div>
 </template>
@@ -71,19 +77,43 @@ export default {
   },
   data() {
     return {
-      fields: ['N', 'Tamaño', 'Tipo', "Eliminar"],
-      items: [
-        { N: 1, Tamaño: "145kb", Tipo: "png" },
-        { N: 2, Tamaño: "145kb", Tipo: "png" },
-        { N: 3, Tamaño: "145kb", Tipo: "png" },
-      ],
+      items: [],
       slide: 0,
       sliding: null,
       file1: null,
+      contador: 0,
     };
   },
 
-  methods: {},
+  methods: {
+    agregarImagen() {
+
+      if (this.file1 === null) {
+        console.log('Esta vacio')
+      }else{
+        if (this.contador === 3) {
+          console.log("Numero maximo de imagenes alcanzado");
+        } else {
+          let tipo = /[.]/.exec(this.file1.name)
+            ? /[^.]+$/.exec(this.file1.name)[0]
+            : undefined;
+          let dataRow = {
+            N: this.contador + 1,
+            Tamaño: this.file1.size / 1000 + " KB",
+            Tipo: tipo,
+          };
+          this.items.push(dataRow);
+          this.contador += 1;
+          this.file1 = null;
+        }
+      }
+    },
+
+    eliminarImagen() {
+      this.items.pop();
+      this.contador -= 1
+    },
+  },
 };
 </script>
 
@@ -98,5 +128,15 @@ export default {
   margin-right: auto;
   font-size: 3.5rem;
   font-weight: bold;
+}
+
+.contedor{
+  position:absolute;
+  top:0;
+  left:0;
+  bottom:0;
+  right:0;
+  height:100% !important;
+  width:100%;
 }
 </style>
