@@ -22,36 +22,26 @@
 
     -->
 
-    <b-carousel-slide caption="Primera imagen"  img-src=../assets/Img_blank.svg>
-      <p>
-        Aqui podras ver una vista previa de como se verian tus imagenes.
-      </p>
+    <b-carousel-slide v-for="(imagen,key) in images" fade  img-height="400px" :key="key" background="dark" :img-src="url[key]">
     </b-carousel-slide>
     
-    <b-carousel-slide caption="Segunda imagen" img-src=../assets/Img_blank.svg>
-      <p>
-        Aqui podras ver una vista previa de como se verian tus imagenes.
-      </p>
-    </b-carousel-slide>
-
-    <!-- Slide with blank fluid image to maintain slide aspect ratio -->
-    <b-carousel-slide caption="Tercera imagen" img-src=../assets/Img_blank.svg>
-      <p>
-        Aqui podras ver una vista previa de como se verian tus imagenes.
-      </p>
-    </b-carousel-slide>
   </b-carousel>
 </template>
 
 <script>
 export default {
     name: "Carousel",
+    props: {
+      images: Array,
+      url: Array
+    },
     data() {
         return {
             slide: 0,
-            file1: null,
-        
         }
+    },
+    methods: {
+      
     },
 };
 </script>
