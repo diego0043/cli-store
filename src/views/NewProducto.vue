@@ -20,5 +20,16 @@ export default {
 </script>
 
 <style>
+::-webkit-scrollbar{
+  width: 10px;
+}
 
+::-webkit-scrollbar-track{
+  background: #F6F6F6;
+}
+
+::-webkit-scrollbar-thumb{
+  background: #D4B499;
+  border-radius: 25px;
+}
 </style>

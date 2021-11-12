@@ -117,4 +117,18 @@ export default {};
   scroll-behavior: smooth;
   position: fixed;
 }
+
+::-webkit-scrollbar{
+  width: 5px;
+  height: 40PX;
+}
+
+::-webkit-scrollbar-track{
+  background: #F6F6F6;
+}
+
+::-webkit-scrollbar-thumb{
+  background: #D4B499;
+  border-radius: 20px;
+}
 </style>

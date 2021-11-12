@@ -6,12 +6,13 @@
     <b-row>
       <b-col class="mt-4">
         <b-row>
-          <b-form-text class="text-labels mr-5">Estado</b-form-text>
+          <b-form-text class="text-labels mr-5 text-input">Estado</b-form-text>
 
           <b-form-radio-group
             v-model="selected"
             :options="options"
-            class="mb-3"
+            class="mb-3 radio"
+            style="color: #B4846C;"
             value-field="item"
             text-field="name"
             disabled-field="notEnabled"
@@ -19,32 +20,35 @@
         </b-row>
 
         <b-row class="mt-2">
-          <b-form-text class="text-labels">Marca</b-form-text>
+          <b-form-text class="text-labels text-input">Marca</b-form-text>
           <b-form-input
             aria-describedby="input-live-help input-live-feedback"
             trim
+            class="input-formulario"
           ></b-form-input>
         </b-row>
 
         <b-row class="mt-3">
-          <b-form-text class="text-labels">Modelo</b-form-text>
+          <b-form-text class="text-labels text-input">Modelo</b-form-text>
           <b-form-input
             aria-describedby="input-live-help input-live-feedback"
             trim
+            class="input-formulario"
           ></b-form-input>
         </b-row>
 
         <b-row class="mt-3">
-          <b-form-text class="text-labels">Pantalla (pulgadas)</b-form-text>
+          <b-form-text class="text-labels text-input">Pantalla (pulgadas)</b-form-text>
           <b-form-input
             aria-describedby="input-live-help input-live-feedback"
             trim
+            class="input-formulario"
           ></b-form-input>
         </b-row>
 
         <b-row class="mt-3">
-          <b-form-text class="text-labels">Sistema</b-form-text>
-          <b-form-select v-model="selected2" :options="options2" class="mb-3">
+          <b-form-text class="text-labels text-input">Sistema</b-form-text>
+          <b-form-select v-model="selected2" :options="options2" class="mb-3 list-formulario">
             <!-- This slot appears above the options from 'options' prop -->
             <template #first>
               <b-form-select-option :value="null" disabled
@@ -57,27 +61,29 @@
         <b-row class="mb-2">
           <b-col>
             <b-row class="mr-2">
-              <b-form-text class="text-labels">Memoria interna</b-form-text>
+              <b-form-text class="text-labels text-inputs">Memoria interna</b-form-text>
               <b-form-input
                 aria-describedby="input-live-help input-live-feedback"
                 trim
+                class="input-formulario"
               ></b-form-input>
             </b-row>
           </b-col>
 
           <b-col>
             <b-row class="mr-2">
-              <b-form-text class="text-labels">Memoria ram</b-form-text>
+              <b-form-text class="text-labels text-inputs">Memoria ram</b-form-text>
               <b-form-input
                 aria-describedby="input-live-help input-live-feedback"
                 trim
+                class="input-formulario"
               ></b-form-input>
             </b-row>
           </b-col>
 
           <b-col>
             <b-row class="contenedor-input-precio">
-              <b-form-text class="text-labels">Precio</b-form-text>
+              <b-form-text class="text-labels text-input">Precio</b-form-text>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -98,7 +104,7 @@
               </svg>
               <b-form-input
                 aria-describedby="input-live-help input-live-feedback"
-                class="input-precio"
+                class="input-precio input-formulario"
                 trim
               ></b-form-input>
             </b-row>
@@ -145,7 +151,8 @@ export default {
   margin-right: auto;
   margin-left: auto;
   font-weight: bold;
-  font-size: 3.2rem;
+  font-size: 2.5rem;
+  color: #B4846C;
 }
 
 .text-labels {
@@ -154,7 +161,7 @@ export default {
 }
 
 .input-precio {
-  text-indent: 20px;
+  text-indent: 25px !important;
 }
 
 .contedenor-input-precio {
@@ -166,4 +173,50 @@ export default {
   top: 60%;
   left: 10px;
 }
+
+.text-labels {
+  font-size: 1rem;
+  margin: 0;
+  color: #B4846C !important;
+  font-weight: bold;
+}
+
+.input-formulario{
+  border: none ;
+  border-bottom: 1px solid #B4846C ;
+  text-indent: 10px;
+  color: #B4846C;
+}
+
+.input-formulario:hover{
+  border: none;
+  border-bottom: 1px solid #B4846C;
+}
+
+.input-formulario:focus{
+  border: none;
+  border-bottom: 1px solid #B4846C;
+  box-shadow: none;
+}
+
+.list-formulario{
+  border: 1px solid #B4846C ;
+  text-indent: 10px;
+  color: #B4846C;
+}
+
+.list-formulario:hover{
+  border: 1px solid #B4846C;
+}
+
+.list-formulario:focus{
+  border: 1px solid #B4846C;
+  box-shadow: none;
+}
+
+.radio:checked{
+  background-color: #B4846C;
+  border: 1px solid #B4846C;
+}
+
 </style>

@@ -1,113 +1,149 @@
 <template>
-  <div>
-    <div class="container-fluid mt-2">
+  <div class="container-fluid contenedor">
 
-      <!-- Titulo-->
-      <b-row>
-        <h2 class="mt-3 h1 centrado">Agregemos unas imagenes</h2>
-      </b-row>
+    <!-- contenedor de los formularios, agregar imagenes etc -->
+    <b-row>
 
-      <!-- carousel y svg-->
-      <b-row>
-        <b-col cols="8">
-          <b-row class="container-fluid">
+      <b-col cols="2" class="vista-previa mr-auto shadow">
+        <b-row>
+          <b-col class="text-input mb-4 mt-3 text-labels"> Vista previa </b-col>
+        </b-row>
+
+        <b-row>
+          <b-col>
+            <b-card
+              title="Card Title"
+              img-src="https://picsum.photos/600/300/?image=25"
+              img-alt="Image"
+              img-top
+              tag="article"
+              style="max-width: 20rem"
+              class="mb-2 text-labels"
+            >
+              <b-card-text>
+                Some quick example text to build on the card
+              </b-card-text>
+
+              <b-button href="#" class="btn-style">Go somewhere</b-button>
+            </b-card>
+          </b-col>
+        </b-row>
+
+        <b-row class="mt-4">
+          <b-col>
+            <b-button  variant="primary" class="mr-2 btn-style">Publicar</b-button>
+            <b-button  variant="secondary btn-style">Cancelar</b-button>
+          </b-col>
+        </b-row>
+
+        
+      </b-col>
+
+      <b-col class="overflow-auto main mt-4 shadow" cols="10">
+        <div class="container-fluid">
+          <!-- Titulo-->
+
+          <b-row>
+            <h2 class="mt-3 mb-4 h1 centrado">Agregemos unas imagenes</h2>
+          </b-row>
+
+          <b-row>
+            <b-col>
+              <img src="../assets/undraw_designer_re_5v95.svg" v-if="contador === 0" width="300" height="300" alt="">
+            </b-col>
+          </b-row>
+
+          <!-- carousel y tabla-->
+          <b-row>
             <!-- carousel-->
-            <b-col class="mt-3 pt-3 mb-1 ml-4">
+            <b-col class="ml-4 mt-3 mb-2 img-cont">
               <carousel v-bind:images="imgs" v-bind:url="img_urls"></carousel>
+              <h6 class="text-danger mt-2 mr-5" v-if="contador === 4">
+                ''Maximo 4 imagenes por anuncio''
+              </h6>
             </b-col>
 
             <!-- table-->
-            <b-col>
-              <b-row>
-                <b-col class="mt-2 ml-4 pt-4 mb-2">
-                  <b-table selectable hover :items="items" class="mr-4">
-                  </b-table>
-                </b-col>
-                <b-col v-if="contador === 4" class="ml-4">
-                  <h6 class="text-danger">''Maximo 4 imagenes por anuncio''</h6>
-                </b-col>
-              </b-row>
+            <b-col class="mb-2 mt-3 mr-4">
+              <b-table selectable hover :items="items" class="mr-4"> </b-table>
             </b-col>
           </b-row>
-        </b-col>
 
-        <b-col cols="4" class="mb-1 img-my">
-          <b-img src="../assets/undraw_image_upload_re_w7pm (1).svg" width="420" height="400" class="img"> </b-img>
-        </b-col>
-      </b-row>
+          <!-- controles subir imagen -->
+          <b-row class="mt-4">
+            <b-col class="mb-2">
+              <b-form-file
+                v-if="contador != 4"
+                accept="image/*"
+                v-model="file1"
+                :state="Boolean(file1)"
+                placeholder="Ninguna imagen seleccionada"
+                drop-placeholder="Suelta la imagen..."
+                @change="onFileChange"
+              ></b-form-file>
+            </b-col>
 
-      <b-row>
-        <b-col cols="5" class="mb-2">
-          <b-form-file
-            accept="image/*"
-            v-model="file1"
-            :state="Boolean(file1)"
-            placeholder="Ninguna imagen seleccionada"
-            drop-placeholder="Suelta la imagen..."
-            @change="onFileChange"
-          ></b-form-file>
-        </b-col>
-        <b-col cols="5" class="mb-2">
-          <b-button
-            :disabled="contador === 4"
-            @click="agregarImagen()"
-            variant="outline-success"
-            class="mr-3"
-          >
-            <b-icon icon="cloud-upload"></b-icon>
-            Subir imagen
-          </b-button>
-          <b-button
-            @click="eliminarImagen()"
-            variant="outline-danger"
-            class="mr-5"
-          >
-            <b-icon icon="trash-fill"></b-icon>
-            Eliminar imagen
-          </b-button>
-        </b-col>
-      </b-row>
-    </div>
+            <b-col class="mb-2">
+              <b-button
+                :disabled="contador === 4"
+                @click="agregarImagen()"
+                variant="outline-success"
+                class="mr-3"
+              >
+                <b-icon icon="cloud-upload"></b-icon>
+                Subir imagen
+              </b-button>
+              <b-button
+                @click="eliminarImagen()"
+                variant="outline-danger"
+                class="mr-5"
+              >
+                <b-icon icon="trash-fill"></b-icon>
+                Eliminar imagen
+              </b-button>
+            </b-col>
+          </b-row>
+        </div>
 
-    <div class="container-fluid mt-5">
-      <form-new-product class="centrado"></form-new-product>
-    </div>
+        <!-- formulario persona-->
+        <div class="container-fluid mt-5">
+          <form-new-product
+            @setDatos="handleClick"
+            class="centrado"
+          ></form-new-product>
+        </div>
 
-    <div class="container-fluid mt-4">
-      <form-especificaciones></form-especificaciones>
-    </div>
+        <!-- formulario telefono-->
+        <div class="container-fluid mt-4">
+          <form-especificaciones></form-especificaciones>
+        </div>
 
-    <div class="container-fluid mt-4">
-      <b-row>
-        <b-col>
-          <b-img src="../assets/undraw_content_team_3epn.svg" width="500" height="600"></b-img>
-        </b-col>
-        <b-col>
-          <p class="mt-5" v-bind="datos_persona">
-            {{datos_persona}}
-          </p>
-        </b-col>
-      </b-row>
-    </div>
+        <div class="container-fluid mt-4">
+          <b-row>
+            <b-col>
+              <b-img
+                src="../assets/undraw_content_team_3epn.svg"
+                width="500"
+                height="600"
+              ></b-img>
+            </b-col>
+          </b-row>
+        </div>
+      </b-col>
+    </b-row>
   </div>
-  
 </template>
 
 <script>
 import Carousel from "./Carousel.vue";
 import FormNewProduct from "../components/FormNewProducto.vue";
-import FormEspecificaciones from '../components/FormEspecificaciones.vue'
+import FormEspecificaciones from "../components/FormEspecificaciones.vue";
 export default {
   name: "NewProducto",
-  props: {
-    datos_persona: Array,
-    datos_producto: Array
-
-  },
   components: {
     Carousel,
     FormNewProduct,
-    FormEspecificaciones
+    FormEspecificaciones,
   },
   data() {
     return {
@@ -119,10 +155,15 @@ export default {
       imgs: [],
       img_urls: [],
       img_url2: null,
+      datos_persona: [],
+      valores: "",
     };
   },
 
   methods: {
+    mostrarText() {
+      this.valores = this.datos_persona[0];
+    },
     agregarImagen() {
       if (this.file1 === null) {
         console.log("Esta vacio");
@@ -161,33 +202,67 @@ export default {
     onFileChange(e) {
       const file = e.target.files[0];
       this.img_url2 = URL.createObjectURL(file);
-      this.file1 = null
+      this.file1 = null;
+    },
+
+    handleClick(datos) {
+      this.datos_persona.push(datos);
     },
   },
 };
 </script>
 
 <style scoped>
-.completo {
-  height: 100% !important;
-  width: 100%;
-}
-
 .centrado {
   margin-left: auto;
   margin-right: auto;
-  font-size: 3.5rem;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #b4846c;
+}
+
+.text-labels{
+  color: #b4846c;
   font-weight: bold;
 }
 
-.contedor {
+.main {
   position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  height: 100% !important;
+  height: 85vh;
+  scroll-behavior: smooth;
+  left: 20%;
+}
+
+.vista-previa {
+  position: absolute;
+  top: 15%;
+  left: 5%;
+  height: 80vh;
   width: 100%;
+  scroll-behavior: smooth;
+  position: fixed;
+}
+
+.contenedor {
+  position: relative;
+}
+
+.btn-style{
+  background: transparent;
+  color: #B4846C;
+  border: 1px solid  #D4B499;
+}
+
+
+
+.btn-style:hover{
+  background: #D4B499;
+  border: 1px solid #D4B499;
+  color: white;
+}
+
+.btn-style:focus{
+  background: #D4B499 !important;
+  box-shadow: none !important;
 }
 </style>
-
