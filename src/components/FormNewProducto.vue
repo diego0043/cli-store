@@ -98,26 +98,35 @@ export default {
 </script>
 
 <style scoped>
+
+:root {
+  --gray: #6c757d;
+  --gray-dark: #343a40;
+  --dark: #343a40;
+  --primario: #D4B499;
+}
+
+
 .centrado {
   margin-right: auto;
   margin-left: auto;
   font-weight: bold;
   font-size: 2.5rem;
-  color: #B4846C;
+  color: var(--gray);
 }
 
 .text-labels {
   font-size: 1rem;
   margin: 0;
-  color: #B4846C !important;
+  color: var(--gray) !important;
   font-weight: bold;
 }
 
 .input-formulario{
   border: none ;
-  border-bottom: 1px solid #B4846C ;
+  border-bottom: 1px solid var(--gray) ;
   text-indent: 10px;
-  color: #B4846C;
+  color: var(--gray);
 }
 
 .input-formulario:hover{
@@ -127,15 +136,14 @@ export default {
 
 .input-formulario:focus{
   border: none;
-  border-bottom: 1px solid #B4846C;
   box-shadow: none;
 }
 
 .area-formulario{
   margin-top: 5px;
-  border: 1px solid #B4846C ;
+  border: 1px solid var(--gray) ;
   text-indent: 10px;
-  color: #B4846C;
+  color: var(--gray);
 }
 
 .area-formulario:hover{
@@ -143,7 +151,6 @@ export default {
 }
 
 .area-formulario:focus{
-  border: 1px solid #B4846C;
   box-shadow: none;
 }
 

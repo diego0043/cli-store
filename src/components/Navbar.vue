@@ -1,62 +1,76 @@
 <template>
   <div>
     <b-navbar class="fixed-top" toggleable="lg" type="light" variant="white">
-      
       <router-link to="/">
         <b-navbar-brand class="d-none d-xl-block d-xxl-block mb-1">
-        <b-icon  icon = "house-door" class="mr-3 d-none d-xl-block d-xxl-block iconPrincipal "></b-icon>
-      </b-navbar-brand>
+          <b-icon
+            icon="house-door"
+            class="mr-3 d-none d-xl-block d-xxl-block iconPrincipal"
+          ></b-icon>
+        </b-navbar-brand>
       </router-link>
-      <label class="mt-1 mr-2 labelPrincipal d-none d-xl-block d-xxl-block">Tienda CellPhone</label>
+      <label class="mt-2 mr-2 labelPrincipal d-none d-xl-block d-xxl-block"
+        >Tienda CellPhone</label
+      >
 
       <b-nav-form class="control-form ml-1">
-        <b-icon  icon = "search" class="iconBuscar mb-1"></b-icon>
+        <b-icon icon="search" class="iconBuscar"></b-icon>
         <b-form-input
           v-model="busqueda"
           size="sm"
           class="mr-sm-2 rounded-pill input-buscar"
           placeholder="Busca en CellPhone"
         ></b-form-input>
-        <button v-if="busqueda != '' "  class="btn-elimina iconEliminar">
-          <b-icon  icon = "x" class="mb-1"></b-icon>
+        <button v-if="busqueda != ''" class="btn-elimina iconEliminar">
+          <b-icon icon="x" class="mb-1"></b-icon>
         </button>
-        <b-button size="sm" class=" d-none d-lg-block d-xl-block d-xxl-block btn-style" type="submit">Search</b-button>
+        <b-button
+          size="sm"
+          class="d-none d-lg-block d-xl-block d-xxl-block btn-style-search"
+          type="submit"
+          variant="light"
+          >Buscar</b-button
+        >
       </b-nav-form>
-      
-      
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
       <b-collapse id="nav-collapse" is-nav>
-        
-          
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
           <b-navbar-nav>
             <router-link to="/" class="d-block">
-              <b-button class="mr-2 ml-1 mb-1 text-center btn-style">
-                <b-icon  icon = "house-door"></b-icon>
-                Inicio
-            </b-button>
+              <b-button
+                active
+                class="mr-2 ml-1 mb-1 text-center btn-style"
+                variant="light"
+              >
+                INICIO
+              </b-button>
             </router-link>
-            <b-button class="mr-2 ml-1 mb-1 text-center btn-style">
-                <b-icon  icon = "graph-up"></b-icon>
-                Estadisticas
+            <b-button
+              class="mr-2 ml-1 mb-1 text-center btn-style"
+              variant="light"
+            >
+              ESTADISTICAS
             </b-button>
-                
-                <router-link to="/addProduct">
-                  <b-button class="mr-2 ml-1 mb-1 text-center btn-style">
-                    <b-icon  icon = "plus-circle"></b-icon>
-                    Nuevo Producto
-                  </b-button>
-                </router-link> 
-            
-            <b-button class="mr-2 ml-1 mb-1 text-center btn-style">
-                <b-icon  icon = "cart-dash"></b-icon>
-                Carrito
+
+            <router-link to="/addProduct">
+              <b-button
+                class="mr-2 ml-1 mb-1 text-center btn-style"
+                variant="light"
+              >
+                NUEVO PRODUCTO
+              </b-button>
+            </router-link>
+
+            <b-button
+              class="mr-2 ml-1 mb-1 mr-4 text-center btn-style"
+              variant="light"
+            >
+              CARRITO
             </b-button>
           </b-navbar-nav>
-          
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
@@ -68,85 +82,110 @@ export default {
   name: "Navbar",
   data() {
     return {
-      busqueda: ''
-    }
+      busqueda: "",
+    };
   },
 };
 </script>
 
 <style scoped>
 
- .control-form{
-     position: relative;
- }
+:root {
+  --gray: #6c757d;
+  --gray-dark: #343a40;
+  --dark: #343a40;
+  --primary: #ffebc9;
+  --secondary: ;
+}
 
- .iconBuscar{
-     position: absolute;
-     top: 7px;
-     left: 10px;
-     color: #B4846C;
- }
+.control-form {
+  position: relative;
+}
 
- .input-buscar{
-     text-indent: 25px;
-     width: 19rem ;
-     margin-right: 10px;
-     border: 1px solid #D4B499;
-     color: #B4846C
-     
+.iconBuscar {
+  position: absolute;
+  top: 7px;
+  left: 10px;
+  color: var(--gray);
+}
 
- }
+.input-buscar {
+  text-indent: 25px;
+  width: 19rem;
+  margin-right: 10px;
+  border: 1px solid var(--gray);
+  color: var(--gray);
+}
 
- .input-buscar::placeholder{
-   color: #D4B499;
- }
+.input-buscar::placeholder {
+  color: var(--gray);
+}
 
- .input-buscar:focus{
-   box-shadow: none !important;
- }
+.input-buscar:focus {
+  box-shadow: none !important;
+}
 
+.iconEliminar {
+  position: absolute;
+  top: 5px;
+  left: 71%;
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  color: var(--gray-dark);
+}
 
- .iconEliminar{
-   position: absolute;
-   top: 5px;
-   left: 71%;
-   background: transparent;
-   border: none;
-   font-size: 1.2rem;
-   color: #B4846C;
- }
+.iconEliminar:hover {
+  color: var(--dark);
+}
 
- .iconEliminar:hover{
-   color: #B4846C;
- }
-
-.iconPrincipal{
+.iconPrincipal {
   font-size: 2rem;
   margin-top: auto;
   margin-bottom: auto;
-  color: #D4B499;
+  color: var();
 }
 
-.labelPrincipal{
+.labelPrincipal {
   font-weight: bold;
-  color: #B4846C;
+  font-size: 1.2rem;
+  color: var(--gray);
 }
 
-.btn-style{
-  background: transparent;
-  color: #B4846C;
-  border: 1px solid  #D4B499;
+.btn-style {
+  background: white;
+  color: var(--gray);
+  border: none;
+  border-bottom: 3px solid white;
 }
 
-.btn-style:hover{
-  background: #D4B499;
-  border: 1px solid #D4B499;
+.btn-style:hover {
+  background: white;
+  color: var(--gray-dark);
+  border-bottom: 3px solid #d4b499;
+}
+
+.btn-style:focus {
+  
+  box-shadow: none;
+}
+
+.btn-style-search {
+  background: white;
+  color: var(--gray);
+  border: 1px solid var(--gray);
+  border-radius: 5px;
+}
+
+.btn-style-search:hover {
+  background: gray;
   color: white;
+  border: 1px solid var(--gray);
 }
 
-.btn-style:focus{
-  background: #D4B499 !important;
-  box-shadow: none !important;
+.btn-style-search:focus {
+  box-shadow: none;
 }
+
 
 </style>

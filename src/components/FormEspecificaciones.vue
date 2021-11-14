@@ -12,7 +12,7 @@
             v-model="selected"
             :options="options"
             class="mb-3 radio"
-            style="color: #B4846C;"
+            style="color: #343a40 ;"
             value-field="item"
             text-field="name"
             disabled-field="notEnabled"
@@ -147,12 +147,20 @@ export default {
 </script>
 
 <style scoped>
+
+:root {
+  --gray: #6c757d;
+  --gray-dark: #343a40;
+  --dark: #343a40;
+  --primario: #D4B499;
+}
+
 .centrado {
   margin-right: auto;
   margin-left: auto;
   font-weight: bold;
   font-size: 2.5rem;
-  color: #B4846C;
+  color: var(--gray);
 }
 
 .text-labels {
@@ -177,15 +185,15 @@ export default {
 .text-labels {
   font-size: 1rem;
   margin: 0;
-  color: #B4846C !important;
+  color: var(--gray) !important;
   font-weight: bold;
 }
 
 .input-formulario{
   border: none ;
-  border-bottom: 1px solid #B4846C ;
+  border-bottom: 1px solid var(--gray) ;
   text-indent: 10px;
-  color: #B4846C;
+  color: var(--gray);
 }
 
 .input-formulario:hover{
@@ -194,15 +202,14 @@ export default {
 }
 
 .input-formulario:focus{
-  border: none;
-  border-bottom: 1px solid #B4846C;
   box-shadow: none;
 }
 
 .list-formulario{
-  border: 1px solid #B4846C ;
+  border: 1px solid var(--gray) ;
   text-indent: 10px;
-  color: #B4846C;
+  font-weight: bold;
+  color: var(--gray);
 }
 
 .list-formulario:hover{
@@ -214,9 +221,14 @@ export default {
   box-shadow: none;
 }
 
+.radio{
+  color: var(--gray);
+}
+
 .radio:checked{
-  background-color: #B4846C;
-  border: 1px solid #B4846C;
+  color: var(--gray);
+  background-color: var(--gray);
+  border: 1px solid var(--dark);
 }
 
 </style>

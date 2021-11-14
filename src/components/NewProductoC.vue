@@ -4,6 +4,7 @@
     <!-- contenedor de los formularios, agregar imagenes etc -->
     <b-row>
 
+      <!-- vista previa anuncio -->
       <b-col cols="2" class="vista-previa mr-auto shadow">
         <b-row>
           <b-col class="text-input mb-4 mt-3 text-labels"> Vista previa </b-col>
@@ -12,32 +13,33 @@
         <b-row>
           <b-col>
             <b-card
-              title="Card Title"
+              title="Titulo"
               img-src="https://picsum.photos/600/300/?image=25"
               img-alt="Image"
               img-top
               tag="article"
               style="max-width: 20rem"
-              class="mb-2 text-labels"
+              class="mb-2 text-labels  card-style"
             >
-              <b-card-text>
-                Some quick example text to build on the card
+              <b-card-text class="text-card">
+                DESCRIPCIÓN Y PRECIO
               </b-card-text>
 
-              <b-button href="#" class="btn-style">Go somewhere</b-button>
+              <b-button href="#" variant="light" class="btn-ver">Mas información</b-button>
             </b-card>
           </b-col>
         </b-row>
 
         <b-row class="mt-4">
           <b-col>
-            <b-button  variant="primary" class="mr-2 btn-style">Publicar</b-button>
+            <b-button  variant="primary" class="mr-2 btn-sel">Publicar</b-button>
             <b-button  variant="secondary btn-style">Cancelar</b-button>
           </b-col>
         </b-row>
 
-        
       </b-col>
+
+      <!-- contenido -->
 
       <b-col class="overflow-auto main mt-4 shadow" cols="10">
         <div class="container-fluid">
@@ -84,21 +86,21 @@
             </b-col>
 
             <b-col class="mb-2">
+
               <b-button
                 :disabled="contador === 4"
                 @click="agregarImagen()"
-                variant="outline-success"
-                class="mr-3"
+                variant="light"
+                class="mr-3 btn-sel"
               >
-                <b-icon icon="cloud-upload"></b-icon>
                 Subir imagen
               </b-button>
+
               <b-button
                 @click="eliminarImagen()"
-                variant="outline-danger"
-                class="mr-5"
+                variant="danger"
+                class="mr-5 btn-no-sel"
               >
-                <b-icon icon="trash-fill"></b-icon>
                 Eliminar imagen
               </b-button>
             </b-col>
@@ -118,17 +120,7 @@
           <form-especificaciones></form-especificaciones>
         </div>
 
-        <div class="container-fluid mt-4">
-          <b-row>
-            <b-col>
-              <b-img
-                src="../assets/undraw_content_team_3epn.svg"
-                width="500"
-                height="600"
-              ></b-img>
-            </b-col>
-          </b-row>
-        </div>
+        
       </b-col>
     </b-row>
   </div>
@@ -213,16 +205,24 @@ export default {
 </script>
 
 <style scoped>
+
+:root {
+  --gray: #6c757d;
+  --gray-dark: #343a40;
+  --dark: #343a40;
+  --primario: #D4B499;
+}
+
 .centrado {
   margin-left: auto;
   margin-right: auto;
   font-size: 2.5rem;
   font-weight: bold;
-  color: #b4846c;
+  color: var(--gray);
 }
 
 .text-labels{
-  color: #b4846c;
+  color: var(--gray-dark);
   font-weight: bold;
 }
 
@@ -247,22 +247,49 @@ export default {
   position: relative;
 }
 
-.btn-style{
-  background: transparent;
-  color: #B4846C;
-  border: 1px solid  #D4B499;
+.btn-sel{
+  background: #7D5A50;
+  color: white;
+  border: 1px solid #7D5A50;
 }
 
-
-
-.btn-style:hover{
-  background: #D4B499;
-  border: 1px solid #D4B499;
+.btn-sel:hover{
+  background: #7D5A50;
+  border: 1px solid #7D5A50;
   color: white;
 }
 
-.btn-style:focus{
+.btn-sel:focus{
   background: #D4B499 !important;
   box-shadow: none !important;
 }
+
+.card-style{
+  border: 1px solid #D4B499;
+}
+
+.btn-ver{
+  background: white;
+  color: #7D5A50;
+  border: 1px solid #7D5A50;
+}
+
+.btn-ver:hover{
+  background: #7D5A50;
+  border: 1px solid #7D5A50;
+  color: white;
+}
+
+.btn-ver:focus{
+  background: #D4B499 !important;
+  box-shadow: none !important;
+}
+
+.text-card{
+  color: var(--gray);
+  font-weight: normal;
+
+}
+
+
 </style>
