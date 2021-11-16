@@ -1,7 +1,7 @@
 <template>
   <b-container>
-    <navbar></navbar>
-    <new-producto></new-producto>
+    <navbar class="mb-1"></navbar>
+    <new-producto class="mt-5"></new-producto>
   </b-container>
 </template>
 

@@ -1,14 +1,15 @@
 <template>
   <div>
     <b-navbar class="fixed-top" toggleable="lg" type="light" variant="white">
-      <router-link to="/">
-        <b-navbar-brand class="d-none d-xl-block d-xxl-block mb-1">
-          <b-icon
-            icon="house-door"
-            class="mr-3 d-none d-xl-block d-xxl-block iconPrincipal"
-          ></b-icon>
-        </b-navbar-brand>
-      </router-link>
+      <b-navbar-brand
+        :to="{ name: 'Home' }"
+        class="d-none d-xl-block d-xxl-block mb-1"
+      >
+        <b-icon
+          icon="house-door"
+          class="mr-3 d-none d-xl-block d-xxl-block iconPrincipal"
+        ></b-icon>
+      </b-navbar-brand>
       <label class="mt-2 mr-2 labelPrincipal d-none d-xl-block d-xxl-block"
         >Tienda CellPhone</label
       >
@@ -39,37 +40,34 @@
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
           <b-navbar-nav>
-            <router-link to="/" class="d-block">
-              <b-button
-                active
-                class="mr-2 ml-1 mb-1 text-center btn-style"
-                variant="light"
-              >
-                INICIO
-              </b-button>
-            </router-link>
-            <b-button
-              class="mr-2 ml-1 mb-1 text-center btn-style"
-              variant="light"
+            <b-nav-item
+              :to="{ name: 'Home' }"
+              class="mr-2 ml-2 mb-1 text-center btn-style"
+              exact
             >
-              ESTADISTICAS
-            </b-button>
+              INICIO
+            </b-nav-item>
 
-            <router-link to="/addProduct">
-              <b-button
-                class="mr-2 ml-1 mb-1 text-center btn-style"
-                variant="light"
-              >
-                NUEVO PRODUCTO
-              </b-button>
-            </router-link>
 
-            <b-button
-              class="mr-2 ml-1 mb-1 mr-4 text-center btn-style"
-              variant="light"
+            <b-nav-item
+              class="mr-2 ml-2 mb-1 text-center btn-style"
+            >
+              ENCUESTAS
+            </b-nav-item>
+
+            <b-nav-item
+              :to="{ name: 'NewProducto' }"
+              class="mr-2 ml-2 mb-1 text-center btn-style"
+            >
+              NUEVO PRODUCTO
+            </b-nav-item>
+
+            <b-nav-item
+              class="mr-2 ml-2 mb-1 text-center btn-style"
             >
               CARRITO
-            </b-button>
+            </b-nav-item>
+            
           </b-navbar-nav>
         </b-navbar-nav>
       </b-collapse>
@@ -89,7 +87,6 @@ export default {
 </script>
 
 <style scoped>
-
 :root {
   --gray: #6c757d;
   --gray-dark: #343a40;
@@ -166,7 +163,6 @@ export default {
 }
 
 .btn-style:focus {
-  
   box-shadow: none;
 }
 
@@ -186,6 +182,4 @@ export default {
 .btn-style-search:focus {
   box-shadow: none;
 }
-
-
 </style>

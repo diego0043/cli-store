@@ -12,7 +12,7 @@
             v-model="selected"
             :options="options"
             class="mb-3 radio"
-            style="color: #343a40 ;"
+            style="color: #343a40"
             value-field="item"
             text-field="name"
             disabled-field="notEnabled"
@@ -22,6 +22,7 @@
         <b-row class="mt-2">
           <b-form-text class="text-labels text-input">Marca</b-form-text>
           <b-form-input
+            v-model="marca"
             aria-describedby="input-live-help input-live-feedback"
             trim
             class="input-formulario"
@@ -31,6 +32,7 @@
         <b-row class="mt-3">
           <b-form-text class="text-labels text-input">Modelo</b-form-text>
           <b-form-input
+            v-model="modelo"
             aria-describedby="input-live-help input-live-feedback"
             trim
             class="input-formulario"
@@ -38,8 +40,11 @@
         </b-row>
 
         <b-row class="mt-3">
-          <b-form-text class="text-labels text-input">Pantalla (pulgadas)</b-form-text>
+          <b-form-text class="text-labels text-input"
+            >Pantalla (pulgadas)</b-form-text
+          >
           <b-form-input
+            v-model="pantalla"
             aria-describedby="input-live-help input-live-feedback"
             trim
             class="input-formulario"
@@ -48,7 +53,11 @@
 
         <b-row class="mt-3">
           <b-form-text class="text-labels text-input">Sistema</b-form-text>
-          <b-form-select v-model="selected2" :options="options2" class="mb-3 list-formulario">
+          <b-form-select
+            v-model="selected2"
+            :options="options2"
+            class="mb-3 list-formulario"
+          >
             <!-- This slot appears above the options from 'options' prop -->
             <template #first>
               <b-form-select-option :value="null" disabled
@@ -61,8 +70,11 @@
         <b-row class="mb-2">
           <b-col>
             <b-row class="mr-2">
-              <b-form-text class="text-labels text-inputs">Memoria interna</b-form-text>
+              <b-form-text class="text-labels text-inputs"
+                >Memoria interna</b-form-text
+              >
               <b-form-input
+                v-model="memoria_int"
                 aria-describedby="input-live-help input-live-feedback"
                 trim
                 class="input-formulario"
@@ -72,8 +84,11 @@
 
           <b-col>
             <b-row class="mr-2">
-              <b-form-text class="text-labels text-inputs">Memoria ram</b-form-text>
+              <b-form-text class="text-labels text-inputs"
+                >Memoria ram</b-form-text
+              >
               <b-form-input
+                v-model="memoria_ram"
                 aria-describedby="input-live-help input-live-feedback"
                 trim
                 class="input-formulario"
@@ -89,20 +104,15 @@
                 width="16"
                 height="16"
                 fill="currentColor"
-                class="bi bi-coin icon"
+                class="bi bi-currency-dollar icon"
                 viewBox="0 0 16 16"
               >
                 <path
-                  d="M5.5 9.511c.076.954.83 1.697 2.182 1.785V12h.6v-.709c1.4-.098 2.218-.846 2.218-1.932 0-.987-.626-1.496-1.745-1.76l-.473-.112V5.57c.6.068.982.396 1.074.85h1.052c-.076-.919-.864-1.638-2.126-1.716V4h-.6v.719c-1.195.117-2.01.836-2.01 1.853 0 .9.606 1.472 1.613 1.707l.397.098v2.034c-.615-.093-1.022-.43-1.114-.9H5.5zm2.177-2.166c-.59-.137-.91-.416-.91-.836 0-.47.345-.822.915-.925v1.76h-.005zm.692 1.193c.717.166 1.048.435 1.048.91 0 .542-.412.914-1.135.982V8.518l.087.02z"
-                />
-                <path
-                  d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"
-                />
-                <path
-                  d="M8 13.5a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11zm0 .5A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"
+                  d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718H4zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73l.348.086z"
                 />
               </svg>
               <b-form-input
+                v-model="precio"
                 aria-describedby="input-live-help input-live-feedback"
                 class="input-precio input-formulario"
                 trim
@@ -113,8 +123,18 @@
       </b-col>
 
       <b-col>
-        <b-img src="../assets/undraw_details_8k13.svg" width="400" height="460">
+        <b-img src="../assets/undraw_details_8k13.svg" width="400" height="400">
         </b-img>
+
+        <b-row class="mb-1">
+          <b-button @click="setEspecificaciones" class="ml-auto" variant="light"
+            >Siguiente<b-icon
+              icon="arrow-right"
+              aria-hidden="true"
+              class="ml-2 mt-1"
+            ></b-icon>
+          </b-button>
+        </b-row>
       </b-col>
     </b-row>
   </div>
@@ -123,36 +143,70 @@
 <script>
 export default {
   name: "FormEspecificaciones",
-  props:{
-      datos: Array 
-      // Areglar la comunicacion de los componentes hijos con los padres
+  props: {
+    datos: Array,
+    // Areglar la comunicacion de los componentes hijos con los padres
   },
-  
+
   data() {
     return {
       options: [
         { item: "A", name: "Nuevo" },
         { item: "B", name: "Usado" },
       ],
-      selected2: null,
-      selected: null,
+      selected: "",
+      marca: "",
+      modelo: "",
+      pantalla: "",
+      selected2: "",
       options2: [
         { value: "A", text: "Android" },
         { value: "B", text: "Ios" },
         { value: "C", text: "Windows" },
       ],
+      memoria_int: "",
+      memoria_ram: "",
+      precio: "",
     };
+  },
+
+  methods: {
+    setEspecificaciones() {
+      if (
+        this.selected === "" ||
+        this.marca === "" ||
+        this.modelo === "" ||
+        this.pantalla === "" ||
+        this.selected2 === "" ||
+        this.memoria_int === "" ||
+        this.memoria_ram === "" ||
+        this.precio === ""
+      ) {
+        this.$emit("getDatosTel", [], false);
+      } else {
+        let datos = [
+          this.selected,
+          this.marca,
+          this.modelo,
+          this.pantalla,
+          this.selected2,
+          this.memoria_int,
+          this.memoria_ram,
+          this.precio,
+        ];
+        this.$emit("getDatosTel", datos, true);
+      }
+    },
   },
 };
 </script>
 
 <style scoped>
-
 :root {
   --gray: #6c757d;
   --gray-dark: #343a40;
   --dark: #343a40;
-  --primario: #D4B499;
+  --primario: #d4b499;
 }
 
 .centrado {
@@ -178,7 +232,7 @@ export default {
 
 .icon {
   position: absolute;
-  top: 60%;
+  top: 55%;
   left: 10px;
 }
 
@@ -189,46 +243,45 @@ export default {
   font-weight: bold;
 }
 
-.input-formulario{
-  border: none ;
-  border-bottom: 1px solid var(--gray) ;
+.input-formulario {
+  border: none;
+  border-bottom: 1px solid var(--gray);
   text-indent: 10px;
   color: var(--gray);
 }
 
-.input-formulario:hover{
+.input-formulario:hover {
   border: none;
-  border-bottom: 1px solid #B4846C;
+  border-bottom: 1px solid #b4846c;
 }
 
-.input-formulario:focus{
+.input-formulario:focus {
   box-shadow: none;
 }
 
-.list-formulario{
-  border: 1px solid var(--gray) ;
+.list-formulario {
+  border: 1px solid var(--gray);
   text-indent: 10px;
   font-weight: bold;
   color: var(--gray);
 }
 
-.list-formulario:hover{
-  border: 1px solid #B4846C;
+.list-formulario:hover {
+  border: 1px solid #b4846c;
 }
 
-.list-formulario:focus{
-  border: 1px solid #B4846C;
+.list-formulario:focus {
+  border: 1px solid #b4846c;
   box-shadow: none;
 }
 
-.radio{
+.radio {
   color: var(--gray);
 }
 
-.radio:checked{
+.radio:checked {
   color: var(--gray);
   background-color: var(--gray);
   border: 1px solid var(--dark);
 }
-
 </style>

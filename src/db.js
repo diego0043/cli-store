@@ -1,13 +1,24 @@
-// Conveniently import this file anywhere to use db
-
-import firebase from 'firebase/app'
+import * as firebase from 'firebase/app'
 import 'firebase/firestore'
+import 'firebase/storage'
 
-export const db = firebase
-    .initializeApp({ projectId: 'cellphone-6c0ca' })
-    .firestore()
+const firebaseConfig = {
+    apiKey: "AIzaSyDXDKzDxq9XLnZySeihyoRipK17KfIGJtQ",
+    authDomain: "cellphone-6c0ca.firebaseapp.com",
+    projectId: "cellphone-6c0ca",
+    storageBucket: "cellphone-6c0ca.appspot.com",
+    messagingSenderId: "941114055042",
+    appId: "1:941114055042:web:45aaa32345eb1ff982179b",
+    measurementId: "G-QGZVHCVFK6"
+  };
 
+  firebase.initializeApp(firebaseConfig)
 
-// Export types that exists in Firestore - Uncomment if you need them in your app
-// const { Timestamp, GeoPoint } = firebase.firestore
-// export { Timestamp, GeoPoint }
+  const storage = firebase.storage()
+  const db = firebase.firestore()
+  
+  // Initialize Firebase
+export{
+    db,
+    storage
+}

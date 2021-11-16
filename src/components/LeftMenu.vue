@@ -7,6 +7,7 @@
         overflow-auto
         menuIzquierdo
         d-none d-xl-block d-xxl-block
+        ml-4
       "
     >
       <b-container class="mb-2">
@@ -112,8 +113,8 @@ export default {};
 
 <style scoped>
 .menuIzquierdo {
-  height: 85vh;
-  width: 300px;
+  height: 82vh;
+  width: 250px;
   scroll-behavior: smooth;
   position: fixed;
 }
