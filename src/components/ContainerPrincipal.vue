@@ -3,7 +3,7 @@
     <!-- Agregar todo lo restante aca -->
     <div class="container-fluid">
       <b-row>
-        <b-col cols="3">
+        <b-col cols="3 d-none d-xl-block d-xxl-block">
           <left-menu></left-menu>
         </b-col>
         <b-col>

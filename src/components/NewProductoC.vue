@@ -22,7 +22,6 @@
         <b-row v-if="stateVistaPrevia != false">
           <b-col>
             <b-card
-            
               :title="titulo_card"
               :img-src="src_card"
               img-alt="Image"
@@ -30,7 +29,6 @@
               tag="article"
               style="max-width: 20rem"
               class="mb-2 text-labels card-style fs-6"
-
             >
               <b-card-text class="text-card">
                 {{ precio_card }}
@@ -120,7 +118,7 @@
 
               <b-button
                 @click="eliminarImagen()"
-                variant="danger"
+                variant="outline-danger"
                 class="mr-5 btn-no-sel"
               >
                 Eliminar imagen
@@ -280,19 +278,37 @@ export default {
 
       docRef.set(lista);
 
-      this.subirImagenes(this.imgs, docRef.id)
-
+      this.subirImagenes(this.imgs, docRef.id, "b-toaster-top-right no-auto-hide");
     },
 
-    subirImagenes(lista_imgs, id) {
+    subirImagenes(lista_imgs, id, toaster, append = false ) {
       lista_imgs.forEach((element) => {
-        let refImg = ref.child('Imagenes/'+id+'/'+element.name)
-        const metaData = {contentType: 'img/jpeg'}
-        refImg
-        .put(element, metaData).then(e => {
-          console.log(e)
-        })
+        let refImg = ref.child("Imagenes/" + id + "/" + element.name);
+        const metaData = { contentType: "img/jpeg" };
+        refImg.put(element, metaData).then((e) => {
+          console.log(e);
+        });
       });
+
+      const h = this.$createElement
+
+       const vNodesTitle = h(
+          'div',
+          { class: ['d-flex', 'flex-grow-1', 'align-items-baseline', 'mr-2'] },
+          [
+            h('strong', { class: 'mr-2' }, '¡Felicidades!'),
+            h('small', { class: 'ml-auto text-italics' }, 'Hace unos segundos')
+          ]
+        )
+
+      this.$bvToast.toast(`Tu anuncio se subio exitosamente`, {
+        title: [vNodesTitle],
+        toaster: toaster,
+        solid: true,
+        autoHideDelay: 10000,
+        appendToast: append,
+      });
+
     },
   },
 };
@@ -341,20 +357,21 @@ export default {
 }
 
 .btn-sel {
-  background: #7d5a50;
+  background: #b4846c;
   color: white;
-  border: 1px solid #7d5a50;
+  border: none;
 }
 
 .btn-sel:hover {
-  background: #7d5a50;
-  border: 1px solid #7d5a50;
+  background: #a8775f;
   color: white;
 }
 
 .btn-sel:focus {
-  background: #d4b499 !important;
-  box-shadow: none !important;
+  
+  background: #a8775f;
+  color: white;
+  box-shadow: none;
 }
 
 .card-style {
