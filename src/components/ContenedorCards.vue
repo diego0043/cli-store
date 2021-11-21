@@ -1,7 +1,6 @@
 <template>
   <div class="mt-3 p-2">
-
-    <b-row class="filtros-secundarios mb-3 ">
+    <b-row class="filtros-secundarios mb-3">
       <!-- precios -->
       <b-col cols="6">
         <b-row>
@@ -12,7 +11,7 @@
                   <b-col cols="4">
                     <label for="" class="labels-text mt-1">Desde</label>
                   </b-col>
-                  <b-col>
+                  <b-col cols="6">
                     <b-form-input
                       id="input-horizontal"
                       size="sm"
@@ -39,7 +38,7 @@
                   <b-col cols="4">
                     <label for="" class="labels-text mt-1">Hasta</label>
                   </b-col>
-                  <b-col>
+                  <b-col cols="6">
                     <b-form-input
                       id="input-horizontal"
                       size="sm"
@@ -134,6 +133,7 @@
       <b-col
         class=""
         xl="3"
+        xxl="3"
         sm="6"
         cols="6"
         v-for="(pub, key) in publicaciones"
@@ -143,7 +143,7 @@
         <b-container class="card-style mb-2">
           <b-row>
             <b-col>
-              <b-img src="../assets/imageAdd.svg" class="mt-1 img-size">
+              <b-img :img-src="publicaciones.url_imagen" class="mt-1 img-size">
               </b-img>
             </b-col>
           </b-row>
@@ -168,7 +168,7 @@
 
           <b-row>
             <b-col>
-              <b-button size="sm" variant="light" class="ml-2 btn-style"
+              <b-button size="sm" variant="light" class="ml-2 btn-style" @click="obtenerUrlImagenes(publicaciones)"
                 >Comprar</b-button
               >
             </b-col>
@@ -184,20 +184,28 @@
 
 <script>
 import { db } from "../db";
-//import {storage} from '../db'
+
 
 export default {
   name: "ContenedorCards",
   data() {
     return {
       publicaciones: [],
-      imagenes: [],
+      array_publicaciones: [],
+      ret: null
     };
   },
 
-  firestore: {
-    publicaciones: db.collection("publicaciones"),
+  firestore:{
+    publicaciones : db.collection('publicaciones')
   },
+
+
+  methods: {
+
+  },
+
+
 };
 </script>
 
@@ -220,7 +228,10 @@ export default {
   height: 14.5rem;
   background-color: #f6f6f6;
   transition: all 0.5s ease-in-out;
-  transform: scale(1.1);
+  transform: scale(1.04);
+  -webkit-box-shadow: 5px 5px 10px 1px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 5px 5px 10px 1px rgba(0, 0, 0, 0.25);
+  box-shadow: 5px 5px 10px 1px rgba(0, 0, 0, 0.25);
 }
 
 .img-size {

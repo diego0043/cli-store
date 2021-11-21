@@ -19,6 +19,10 @@
           </b-img>
         </b-row>
 
+        <b-row>
+          <label for="" :v-model="array_imagenes"></label>
+        </b-row>
+
         <b-row v-if="stateVistaPrevia != false">
           <b-col>
             <b-card
@@ -41,8 +45,8 @@
           </b-col>
         </b-row>
 
-        <b-row class="mt-4" v-if="stateVistaPrevia != false">
-          <b-col>
+        <b-row class="mt-4">
+          <b-col cols="12">
             <b-button
               variant="primary"
               class="mr-2 btn-sel"
@@ -51,13 +55,17 @@
             >
             <b-button variant="secondary btn-style">Cancelar</b-button>
           </b-col>
+
+          <b-col class="mt-2" v-if="state_subida === true">
+            <b-progress :value="25" variant="success"></b-progress>
+          </b-col>
         </b-row>
       </b-col>
 
       <!-- contenido -->
 
-      <b-col class="overflow-auto main mt-4" cols="10">
-        <div class="contenedor-principal">
+      <b-col class="overflow-auto main mt-4" cols="10" v-if="stateImg != false">
+        <div class="contenedor-principal" v-if="stateImg != false">
           <!-- Titulo-->
 
           <b-row>
@@ -143,6 +151,11 @@
           ></form-especificaciones>
         </div>
       </b-col>
+
+      <b-col v-if="stateSpinner != false" class="cargando">
+        <b-spinner class="ml-spin mr-2" :variant="success"></b-spinner>
+        <label for="" class="text-cargando text-card">Publicando anuncio</label>
+      </b-col>
     </b-row>
   </div>
 </template>
@@ -153,6 +166,7 @@ import FormNewProduct from "../components/FormNewProducto.vue";
 import FormEspecificaciones from "../components/FormEspecificaciones.vue";
 import { db } from "../db";
 import { storage } from "../db";
+
 const ref = storage.ref();
 
 export default {
@@ -179,6 +193,9 @@ export default {
       //mostrar forms y vista previa
       stateForm1: false,
       stateVistaPrevia: false,
+      stateSpinner: false,
+      stateImg: true,
+      state_subida: false,
 
       //modelos para vista previa img
       mensaje_vista_previa:
@@ -186,6 +203,7 @@ export default {
       src_card: null,
       titulo_card: "",
       precio_card: "",
+      array_imagenes: [],
     };
   },
 
@@ -206,7 +224,7 @@ export default {
             : undefined;
           let dataRow = {
             N: this.contador + 1,
-            Tamaño: this.file1.size / 1000 + " KB",
+            Tamaño: parseFloat(this.file1.size / 1048576).toFixed(2) + " MB",
             Tipo: tipo,
           };
           this.imgs.push(this.file1);
@@ -260,6 +278,9 @@ export default {
     subirAnuncio() {
       const docRef = db.collection("publicaciones").doc();
 
+      this.subirImagenes(this.imgs, docRef.id);
+
+      /*
       const lista = {
         titulo: this.datos_persona[0],
         vendedor: this.datos_persona[1],
@@ -274,32 +295,88 @@ export default {
         ram: this.datos_telefono[6],
         precio: this.datos_telefono[7],
         id: docRef.id,
+        portada: a_ver
       };
 
       docRef.set(lista);
 
-      this.subirImagenes(this.imgs, docRef.id, "b-toaster-top-right no-auto-hide");
+      */
     },
 
-    subirImagenes(lista_imgs, id, toaster, append = false ) {
+    subirImagenes(lista_imgs, id) {
+      const metaData = { contentType: "img/jpeg" };
+      let contenedor_imagenes = []
+
       lista_imgs.forEach((element) => {
-        let refImg = ref.child("Imagenes/" + id + "/" + element.name);
-        const metaData = { contentType: "img/jpeg" };
-        refImg.put(element, metaData).then((e) => {
-          console.log(e);
-        });
+        let refImg = ref
+          .child("Imagenes/" + id + "/" + element.name)
+          .put(element, metaData);
+
+        // Listen for state changes, errors, and completion of the upload.
+        refImg.on(
+          "state_changed", 
+          function (snapshot) {
+            // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+            var progress =
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log("Upload is " + progress + "% done");
+            
+          },
+          function (error) {
+            // A full list of error codes is available at
+            // https://firebase.google.com/docs/storage/web/handle-errors
+            switch (error.code) {
+              case "storage/unauthorized":
+                // User doesn't have permission to access the object
+                break;
+
+              case "storage/canceled":
+                // User canceled the upload
+                break;
+
+              case "storage/unknown":
+                // Unknown error occurred, inspect error.serverResponse
+                break;
+            }
+          },
+          function () {
+
+
+            // Upload completed successfully, now we can get the download URL
+            refImg.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+              console.log("File available at", downloadURL);
+              contenedor_imagenes.push(downloadURL)
+            });
+            
+          }
+
+        );
+
+        console.log(contenedor_imagenes)
       });
+    },
 
-      const h = this.$createElement
+    syncDelay(milliseconds) {
+      var start = new Date().getTime();
+      var end = 0;
+      while (end - start < milliseconds) {
+        end = new Date().getTime();
+      }
+    },
 
-       const vNodesTitle = h(
-          'div',
-          { class: ['d-flex', 'flex-grow-1', 'align-items-baseline', 'mr-2'] },
-          [
-            h('strong', { class: 'mr-2' }, '¡Felicidades!'),
-            h('small', { class: 'ml-auto text-italics' }, 'Hace unos segundos')
-          ]
-        )
+    mensajeTerminado() {
+      let append = false;
+      let toaster = "b-toaster-top-right no-auto-hide";
+      const h = this.$createElement;
+
+      const vNodesTitle = h(
+        "div",
+        { class: ["d-flex", "flex-grow-1", "align-items-baseline", "mr-2"] },
+        [
+          h("strong", { class: "mr-2" }, "¡Felicidades!"),
+          h("small", { class: "ml-auto text-italics" }, "Hace unos segundos"),
+        ]
+      );
 
       this.$bvToast.toast(`Tu anuncio se subio exitosamente`, {
         title: [vNodesTitle],
@@ -308,7 +385,6 @@ export default {
         autoHideDelay: 10000,
         appendToast: append,
       });
-
     },
   },
 };
@@ -368,7 +444,6 @@ export default {
 }
 
 .btn-sel:focus {
-  
   background: #a8775f;
   color: white;
   box-shadow: none;
@@ -403,5 +478,21 @@ export default {
 .contenedor-principal {
   width: 100%;
   margin-bottom: 10%;
+}
+
+.cargando {
+  margin-top: 20%;
+  margin-left: 8%;
+  position: relative;
+}
+
+.spin {
+  position: absolute;
+  top: 10px;
+}
+
+.text-cargando {
+  position: absolute;
+  bottom: 1px;
 }
 </style>
