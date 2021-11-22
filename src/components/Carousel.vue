@@ -53,7 +53,9 @@ export default {
 
 
 .img-tam{
-  max-width: 300px;
-  max-height: 200px;
+  max-width: 400px;
+  max-height: 250px;
+  min-width: 100px;
+  min-height: 100px;
 }
 </style>

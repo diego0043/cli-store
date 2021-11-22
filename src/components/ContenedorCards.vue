@@ -1,10 +1,13 @@
 <template>
   <div class="mt-3 p-2">
-
-
-    <b-row class="filtros-secundarios mb-3 d-none d-lg-block d-xl-block d-xxl-block">
+    <b-row
+      class="filtros-secundarios mb-3 d-none d-lg-block d-xl-block d-xxl-block"
+    >
       <!-- precios -->
-      <b-col cols="6" class="d-none d-lg-inline-block d-xl-inline-block d-xxl-inline-block">
+      <b-col
+        cols="6"
+        class="d-none d-lg-inline-block d-xl-inline-block d-xxl-inline-block"
+      >
         <b-row>
           <b-col>
             <b-row>
@@ -67,7 +70,13 @@
       </b-col>
 
       <!-- ordenar por: -->
-      <b-col cols="6" class="final-filtro1 d-none  d-lg-inline-block d-xl-inline-block d-xxl-inline-block">
+      <b-col
+        cols="6"
+        class="
+          final-filtro1
+          d-none d-lg-inline-block d-xl-inline-block d-xxl-inline-block
+        "
+      >
         <b-row>
           <b-col>
             <b-row>
@@ -143,10 +152,9 @@
       >
         <!-- cards -->
         <b-container class="card-style mb-2">
-          <b-row >
+          <b-row>
             <b-col>
-              <b-img :src="pub.portada" class="mt-2 img-size">
-              </b-img>
+              <b-img :src="pub.portada" class="mt-2 img-size"> </b-img>
             </b-col>
           </b-row>
 
@@ -154,7 +162,7 @@
           <b-row>
             <b-col>
               <label for="" class="mt-2 titulo-card">{{
-                publicaciones[key].titulo
+                pub.titulo
               }}</label>
             </b-col>
           </b-row>
@@ -163,14 +171,18 @@
           <b-row>
             <b-col>
               <label for="" class="label-precio"
-                >${{ publicaciones[key].precio }}</label
+                >${{ pub.precio }}</label
               >
             </b-col>
           </b-row>
 
           <b-row>
             <b-col>
-              <b-button size="sm" variant="light" class="ml-2 btn-style" @click="obtenerUrlImagenes(publicaciones)"
+              <b-button
+                size="sm"
+                variant="light"
+                class="ml-2 btn-style"
+                @click="obtenerUrlImagenes(publicaciones)"
                 >Comprar</b-button
               >
             </b-col>
@@ -187,27 +199,21 @@
 <script>
 import { db } from "../db";
 
-
 export default {
   name: "ContenedorCards",
   data() {
     return {
       publicaciones: [],
       array_publicaciones: [],
-      ret: null
+      ret: null,
     };
   },
 
-  firestore:{
-    publicaciones : db.collection('publicaciones')
+  firestore: {
+    publicaciones: db.collection("publicaciones"),
   },
 
-
-  methods: {
-
-  },
-
-
+  methods: {},
 };
 </script>
 

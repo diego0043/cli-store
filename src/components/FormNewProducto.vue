@@ -7,18 +7,27 @@
     <b-row>
       <!-- form personal -->
 
-      <b-col>
+      <b-col class="d-none d-lg-block d-xl-block d-xxl-block">
         <b-img
           src="../assets/undraw_information_tab_ocka.svg"
           width="500"
-          height="400"
+          height="500"
+        >
+        </b-img>
+      </b-col>
+
+      <b-col class="d-block d-lg-none d-xl-none d-xxl-none">
+        <b-img
+          src="../assets/undraw_information_tab_ocka.svg"
+          width="300"
+          height="300"
         >
         </b-img>
       </b-col>
 
       <b-col>
         <b-row>
-          <b-form-text class="text-labels mt-4">Titulo</b-form-text>
+          <b-form-text class="text-labels">Titulo</b-form-text>
           <b-form-input
             v-model="titulo"
             aria-describedby="input-live-help input-live-feedback"
@@ -64,7 +73,7 @@
           ></b-form-textarea>
         </b-row>
 
-        <b-row class="">
+        <b-row class="mb-4">
           <b-button @click="datosPersona" class="mt-3 ml-auto" variant="light"
             >Siguiente<b-icon
               icon="arrow-right"

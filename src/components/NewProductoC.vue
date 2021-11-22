@@ -2,73 +2,17 @@
   <div class="container-fluid contenedor">
     <!-- contenedor de los formularios, agregar imagenes etc -->
     <b-row>
-      <!-- vista previa anuncio -->
-      <b-col cols="2" class="vista-previa mr-auto shadow">
-        <b-row>
-          <b-col class="text-input mb-4 mt-3 text-labels"
-            ><p class="h6">{{ mensaje_vista_previa }}</p></b-col
-          >
-        </b-row>
-
-        <b-row class="mt-5 ml-2" v-if="stateVistaPrevia === false">
-          <b-img
-            src="../assets/undraw_home_screen_4n7s.svg"
-            width="200"
-            height="200"
-          >
-          </b-img>
-        </b-row>
-
-        <b-row v-if="stateVistaPrevia != false">
-          <b-col>
-            <b-card
-              :title="titulo_card"
-              :img-src="src_card"
-              img-alt="Image"
-              img-top
-              tag="article"
-              style="max-width: 20rem"
-              class="mb-2 text-labels card-style fs-6"
-            >
-              <b-card-text class="text-card">
-                {{ precio_card }}
-              </b-card-text>
-
-              <b-button href="#" variant="light" class="btn-ver"
-                >Mas información</b-button
-              >
-            </b-card>
-          </b-col>
-        </b-row>
-
-        <b-row class="mt-4">
-          <b-col cols="12">
-            <b-button
-              variant="primary"
-              class="mr-2 btn-sel"
-              v-on:click="subirAnuncio"
-              >Publicar</b-button
-            >
-            <b-button variant="secondary btn-style">Cancelar</b-button>
-          </b-col>
-
-          <b-col class="mt-2" v-if="state_subida === true">
-            <b-progress :value="25" variant="success"></b-progress>
-          </b-col>
-        </b-row>
-      </b-col>
-
       <!-- contenido -->
 
-      <b-col class="overflow-auto main mt-4" cols="10" v-if="stateImg != false">
+      <b-col class="main mt-4" cols="12" v-if="stateImg != false">
         <div class="contenedor-principal" v-if="stateImg != false">
           <!-- Titulo-->
 
           <b-row>
-            <h2 class="mt-3 h1 centrado">Agregemos unas imagenes</h2>
+            <h2 class="mt-2 h1 centrado">Agregemos unas imagenes</h2>
           </b-row>
 
-          <b-row>
+          <b-row class="">
             <b-col>
               <img
                 src="../assets/undraw_designer_re_5v95.svg"
@@ -76,57 +20,76 @@
                 width="300"
                 height="300"
                 alt=""
+                class="mb-4"
               />
             </b-col>
           </b-row>
 
           <!-- carousel y tabla-->
-          <b-row class="mb-5">
+          <b-row class="mb-2" v-if="contador != 0">
             <!-- carousel-->
-            <b-col class="ml-4 mt-3 mb-2 img-cont">
-              <carousel v-bind:images="imgs" v-bind:url="img_urls"></carousel>
-              <h6 class="text-labels mt-3 mr-5 fw-bold" v-if="contador != 0">
-                {{ contador }}/4
-              </h6>
+            <b-col cols="12" sm="6" lg="6" xl="6" xxl="6" class="mt-3 mb-2">
+              <b-row>
+                <b-col>
+                  <carousel
+                    v-bind:images="imgs"
+                    v-bind:url="img_urls"
+                  ></carousel>
+                </b-col>
+              </b-row>
+              <b-row>
+                <b-col>
+                  <h6 class="text-labels mt-3 fw-bold">{{ contador }}/4</h6>
+                </b-col>
+              </b-row>
             </b-col>
 
             <!-- table-->
-            <b-col class="mb-2 mt-3 mr-4">
+            <b-col cols="12" sm="6" lg="6" xl="6" xxl="6" class="mb-2 mt-3">
               <b-table selectable hover :items="items" class="mr-4"> </b-table>
             </b-col>
           </b-row>
 
           <!-- controles subir imagen -->
+
           <b-row class="mt-3">
-            <b-col class="mb-2">
+            <b-col class="mb-3" cols="12" lg="6" xl="6" xxl="6">
               <b-form-file
                 :disabled="contador === 4"
                 accept="image/*"
                 v-model="file1"
                 :state="Boolean(file1)"
-                placeholder="Ninguna imagen seleccionada"
+                placeholder="Añadir imagenes"
                 drop-placeholder="Suelta la imagen..."
                 @change="onFileChange"
               ></b-form-file>
             </b-col>
 
             <b-col class="mb-2">
-              <b-button
-                :disabled="contador === 4"
-                @click="agregarImagen()"
-                variant="light"
-                class="mr-3 btn-sel"
-              >
-                Subir imagen
-              </b-button>
+              <b-row>
+                <b-col cols="12" sm="6" xl="6" lg="6" xxl="6" class="mb-3">
+                  <b-button
+                    block
+                    :disabled="contador === 4"
+                    @click="agregarImagen()"
+                    variant="light"
+                    class="mr-3 btn-sel"
+                  >
+                    Subir imagen
+                  </b-button>
+                </b-col>
 
-              <b-button
-                @click="eliminarImagen()"
-                variant="outline-danger"
-                class="mr-5 btn-no-sel"
-              >
-                Eliminar imagen
-              </b-button>
+                <b-col cols="12" sm="6" xl="6" lg="6" xxl="6" class="mb-3">
+                  <b-button
+                    block
+                    @click="eliminarImagen()"
+                    variant="outline-danger"
+                    class="mr-5 btn-no-sel"
+                  >
+                    Eliminar imagen
+                  </b-button>
+                </b-col>
+              </b-row>
             </b-col>
           </b-row>
         </div>
@@ -394,8 +357,34 @@ export default {
 .main {
   position: absolute;
   height: 85vh;
+  width: 100%;
   scroll-behavior: smooth;
-  left: 20%;
+  left: 0%;
+}
+
+.inputfile + label {
+  max-width: 80%;
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+  display: inline-block;
+  overflow: hidden;
+  padding: 0.625rem 1.25rem;
+}
+
+.inputfile + label svg {
+  vertical-align: middle;
+  fill: currentColor;
+  margin-top: -0.25em;
+  margin-right: 0.25em;
+}
+
+.iborrainputfile {
+  font-size: 16px;
+  font-weight: normal;
+  font-family: "Lato";
 }
 
 .vista-previa {
@@ -410,6 +399,7 @@ export default {
 
 .contenedor {
   position: relative;
+  left: 0;
 }
 
 .btn-sel {

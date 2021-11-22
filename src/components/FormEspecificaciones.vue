@@ -4,6 +4,17 @@
       <h2 class="centrado">Describe las caracteristicas de tu telefono</h2>
     </b-row>
     <b-row>
+
+      <b-col class="d-block d-lg-none d-xl-none d-xxl-none">
+        <b-img
+          src="../assets/undraw_details_8k13.svg"
+          width="300"
+          height="300"
+        >
+        </b-img>
+      </b-col>
+
+
       <b-col class="mt-4">
         <b-row>
           <b-form-text class="text-labels mr-5 text-input">Estado</b-form-text>
@@ -67,8 +78,9 @@
           </b-form-select>
         </b-row>
 
-        <b-row class="mb-2">
-          <b-col>
+        <b-row >
+
+          <b-col >
             <b-row class="mr-2">
               <b-form-text class="text-labels text-inputs"
                 >Memoria interna</b-form-text
@@ -82,8 +94,8 @@
             </b-row>
           </b-col>
 
-          <b-col>
-            <b-row class="mr-2">
+          <b-col >
+            <b-row class="mr-2 mb-3">
               <b-form-text class="text-labels text-inputs"
                 >Memoria ram</b-form-text
               >
@@ -96,8 +108,8 @@
             </b-row>
           </b-col>
 
-          <b-col>
-            <b-row class="contenedor-input-precio">
+          <b-col cols="12" lg="4" xl="4" >
+            <b-row class="contenedor-input-precio mb-3">
               <b-form-text class="text-labels text-input">Precio</b-form-text>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -120,22 +132,30 @@
             </b-row>
           </b-col>
         </b-row>
+
+
       </b-col>
 
-      <b-col>
-        <b-img src="../assets/undraw_details_8k13.svg" width="400" height="400">
+      <b-col class="d-none d-lg-block d-xl-block d-xxl-block">
+        <b-img
+          src="../assets/undraw_details_8k13.svg"
+          width="500"
+          height="400"
+          class="ml-4"
+        >
         </b-img>
-
-        <b-row class="mb-1">
-          <b-button @click="setEspecificaciones" class="ml-auto" variant="light"
-            >Siguiente<b-icon
-              icon="arrow-right"
-              aria-hidden="true"
-              class="ml-2 mt-1"
-            ></b-icon>
-          </b-button>
-        </b-row>
       </b-col>
+
+    </b-row>
+
+    <b-row>
+      <b-button @click="setEspecificaciones" class="ml-auto mb-4" variant="light"
+        >Siguiente<b-icon
+          icon="arrow-right"
+          aria-hidden="true"
+          class="ml-2 mt-1"
+        ></b-icon>
+      </b-button>
     </b-row>
   </div>
 </template>
@@ -232,7 +252,7 @@ export default {
 
 .icon {
   position: absolute;
-  top: 55%;
+  top: 43%;
   left: 10px;
 }
 
