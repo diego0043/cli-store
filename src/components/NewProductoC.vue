@@ -19,10 +19,6 @@
           </b-img>
         </b-row>
 
-        <b-row>
-          <label for="" :v-model="array_imagenes"></label>
-        </b-row>
-
         <b-row v-if="stateVistaPrevia != false">
           <b-col>
             <b-card
@@ -203,7 +199,8 @@ export default {
       src_card: null,
       titulo_card: "",
       precio_card: "",
-      array_imagenes: [],
+      img1: null,
+      upload_value: 0,
     };
   },
 
@@ -276,83 +273,66 @@ export default {
     },
 
     subirAnuncio() {
-      const docRef = db.collection("publicaciones").doc();
-
-      this.subirImagenes(this.imgs, docRef.id);
-
-      /*
-      const lista = {
-        titulo: this.datos_persona[0],
-        vendedor: this.datos_persona[1],
-        telefono: this.datos_persona[2],
-        descripcion: this.datos_persona[3],
-        estado: this.datos_telefono[0],
-        marca: this.datos_telefono[1],
-        modelo: this.datos_telefono[2],
-        pantalla: this.datos_telefono[3],
-        sistema: this.datos_telefono[4],
-        rom: this.datos_telefono[5],
-        ram: this.datos_telefono[6],
-        precio: this.datos_telefono[7],
-        id: docRef.id,
-        portada: a_ver
-      };
-
-      docRef.set(lista);
-
-      */
+      this.subirImagenes(this.imgs);
     },
 
-    subirImagenes(lista_imgs, id) {
+    subirImagenes(lista_imgs) {
+      const docRef = db.collection("publicaciones").doc();
+
       const metaData = { contentType: "img/jpeg" };
-      let contenedor_imagenes = []
+      this.img1 = [];
+      const number_of_images = 1 / lista_imgs.length;
+      let contador = 0;
 
       lista_imgs.forEach((element) => {
-        let refImg = ref
-          .child("Imagenes/" + id + "/" + element.name)
+        const storageRef = ref
+          .child("Imagenes/" + docRef.id + "/" + element.name)
           .put(element, metaData);
-
-        // Listen for state changes, errors, and completion of the upload.
-        refImg.on(
-          "state_changed", 
-          function (snapshot) {
-            // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-            var progress =
+        storageRef.on(
+          `state_changed`,
+          (snapshot) => {
+            this.upload_value =
               (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            console.log("Upload is " + progress + "% done");
-            
-          },
-          function (error) {
-            // A full list of error codes is available at
-            // https://firebase.google.com/docs/storage/web/handle-errors
-            switch (error.code) {
-              case "storage/unauthorized":
-                // User doesn't have permission to access the object
-                break;
+            console.log(this.upload_value);
 
-              case "storage/canceled":
-                // User canceled the upload
-                break;
-
-              case "storage/unknown":
-                // Unknown error occurred, inspect error.serverResponse
-                break;
+            if (this.upload_value == 100) {
+              contador += number_of_images;
+              console.log(contador);
             }
           },
-          function () {
+          (error) => {
+            console.log(error.message);
+          },
+          () => {
+            this.upload_value = 100;
+            storageRef.snapshot.ref.getDownloadURL().then((url) => {
+              this.img1.push(url);
+              console.log(this.img1);
 
+              if (contador == 1) {
+                const lista = {
+                  titulo: this.datos_persona[0],
+                  vendedor: this.datos_persona[1],
+                  telefono: this.datos_persona[2],
+                  descripcion: this.datos_persona[3],
+                  estado: this.datos_telefono[0],
+                  marca: this.datos_telefono[1],
+                  modelo: this.datos_telefono[2],
+                  pantalla: this.datos_telefono[3],
+                  sistema: this.datos_telefono[4],
+                  rom: this.datos_telefono[5],
+                  ram: this.datos_telefono[6],
+                  precio: this.datos_telefono[7],
+                  id: docRef.id,
+                  portada: this.img1[0],
+                };
 
-            // Upload completed successfully, now we can get the download URL
-            refImg.snapshot.ref.getDownloadURL().then(function (downloadURL) {
-              console.log("File available at", downloadURL);
-              contenedor_imagenes.push(downloadURL)
+                docRef.set(lista);
+                console.log("subida completa");
+              }
             });
-            
           }
-
         );
-
-        console.log(contenedor_imagenes)
       });
     },
 
