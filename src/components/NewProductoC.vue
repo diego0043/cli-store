@@ -1,10 +1,10 @@
 <template>
   <div class="container-fluid contenedor">
     <!-- contenedor de los formularios, agregar imagenes etc -->
-    <b-row>
+    <b-row v-if="state_contenedor != false">
       <!-- contenido -->
 
-      <b-col class="main mt-4" cols="12" v-if="stateImg != false">
+      <b-col class="main mt-4" cols="12">
         <div class="contenedor-principal" v-if="stateImg != false">
           <!-- Titulo-->
 
@@ -95,8 +95,8 @@
         </div>
 
         <!-- formulario persona-->
-        <div v-if="contador != 0" class="container-fluid mt-5">
-          <form-new-product
+        <div v-if="contador != 0" class="container-fluid mt-5" >
+          <form-new-product 
             @getDatosPersona="datosPersona"
             class="centrado"
           ></form-new-product>
@@ -109,11 +109,85 @@
             v-if="stateForm1 === true"
           ></form-especificaciones>
         </div>
-      </b-col>
 
-      <b-col v-if="stateSpinner != false" class="cargando">
-        <b-spinner class="ml-spin mr-2" :variant="success"></b-spinner>
-        <label for="" class="text-cargando text-card">Publicando anuncio</label>
+        <div v-if="stateVistaPrevia != false">
+          <b-row class="mb-3">
+            <b-col>
+              <b-button
+                v-b-modal.modal-1
+                @click="subirAnuncio()"
+                class="mr-2 mb-3 btn-sel"
+              >
+                Publicar
+              </b-button>
+              <b-button class="mb-3" variant="outline-secondary">
+                Cancelar
+              </b-button>
+            </b-col>
+          </b-row>
+
+          <b-modal id="modal-1" hide-footer :title="this.datos_persona[0]">
+            <b-row>
+                <b-spinner v-if="state_subida != false" variant="success" label="Spinning"></b-spinner>
+              <b-col>
+                <label for="">{{ this.mensaje_vista_previa }}</label>
+              </b-col>
+              
+            </b-row>
+            <b-row>
+              <b-col v-if="state_subida != false">
+                <b-progress
+                  :value="upload_value_bar"
+                  :max="100"
+                  class="mb-3"
+                  variant="success"
+                  :animated="true"
+                ></b-progress>
+              </b-col>
+            </b-row>
+          </b-modal>
+        </div>
+      </b-col>
+    </b-row>
+
+    <b-row v-if="state_contenedor === false">
+      <b-col>
+        <b-img
+          src="../assets/undraw_well_done_i2wr.svg"
+          width="400"
+          height="500"
+        ></b-img>
+      </b-col>
+      <b-col cols="7">
+        <label for="" class="centrado mt-5"
+          >Tu anuncio ya se encuentra activo, ve a la pagina principal para
+          poder verlo</label
+        >
+        <router-link
+          to="/"
+          class="d-none d-sm-none d-md-none d-lg-block d-xl-block"
+        >
+          <b-button variant="light" class="btn-sel">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-house"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"
+              />
+              <path
+                fill-rule="evenodd"
+                d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"
+              />
+            </svg>
+            Ir a inicio
+          </b-button>
+        </router-link>
       </b-col>
     </b-row>
   </div>
@@ -155,15 +229,16 @@ export default {
       stateSpinner: false,
       stateImg: true,
       state_subida: false,
+      state_contenedor: true,
 
       //modelos para vista previa img
-      mensaje_vista_previa:
-        "Llena los campos para poder obtener una vista previa de tu anuncio",
+      mensaje_vista_previa: "Creando anuncio...",
       src_card: null,
       titulo_card: "",
       precio_card: "",
       img1: null,
       upload_value: 0,
+      upload_value_bar: 0,
     };
   },
 
@@ -225,7 +300,6 @@ export default {
     datosTelefono(datos, state) {
       if (state === true) {
         this.datos_telefono = datos;
-        this.mensaje_vista_previa = "Vista Previa";
         this.src_card = this.img_urls[0];
         this.titulo_card = this.datos_persona[0];
         this.precio_card = this.datos_telefono[7];
@@ -235,11 +309,9 @@ export default {
       }
     },
 
-    subirAnuncio() {
-      this.subirImagenes(this.imgs);
-    },
+    subirAnuncio(lista_imgs = this.imgs) {
+      this.state_subida = true;
 
-    subirImagenes(lista_imgs) {
       const docRef = db.collection("publicaciones").doc();
 
       const metaData = { contentType: "img/jpeg" };
@@ -256,11 +328,10 @@ export default {
           (snapshot) => {
             this.upload_value =
               (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            console.log(this.upload_value);
 
             if (this.upload_value == 100) {
               contador += number_of_images;
-              console.log(contador);
+              this.upload_value_bar += contador * 100;
             }
           },
           (error) => {
@@ -270,9 +341,9 @@ export default {
             this.upload_value = 100;
             storageRef.snapshot.ref.getDownloadURL().then((url) => {
               this.img1.push(url);
-              console.log(this.img1);
 
               if (contador == 1) {
+                this.upload_value_bar = this.upload_value_bar - 10;
                 const lista = {
                   titulo: this.datos_persona[0],
                   vendedor: this.datos_persona[1],
@@ -291,7 +362,14 @@ export default {
                 };
 
                 docRef.set(lista);
-                console.log("subida completa");
+                this.state_subida = false;
+
+                this.mensaje_vista_previa =
+                  "¡Felicidades! " +
+                  this.datos_persona[1] +
+                  " tu anuncio ya esta activo";
+
+                this.state_contenedor = false;
               }
             });
           }
@@ -448,21 +526,5 @@ export default {
 .contenedor-principal {
   width: 100%;
   margin-bottom: 10%;
-}
-
-.cargando {
-  margin-top: 20%;
-  margin-left: 8%;
-  position: relative;
-}
-
-.spin {
-  position: absolute;
-  top: 10px;
-}
-
-.text-cargando {
-  position: absolute;
-  bottom: 1px;
 }
 </style>

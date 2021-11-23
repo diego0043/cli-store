@@ -152,7 +152,8 @@
       >
         <!-- cards -->
         <b-container class="card-style mb-2">
-          <b-row>
+
+          <b-row class="contenedor-imagen-card">
             <b-col>
               <b-img :src="pub.portada" class="mt-2 img-size"> </b-img>
             </b-col>
@@ -243,8 +244,13 @@ export default {
 }
 
 .img-size {
-  max-width: 140px;
-  max-height: 140px;
+  max-width: 100px;
+  max-height: 100px;
+}
+
+.contenedor-imagen-card{
+  height: 100px;
+  max-height: 100px;
 }
 
 .titulo-card {

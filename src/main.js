@@ -5,6 +5,7 @@ import './plugins/bootstrap-vue'
 import App from './App.vue'
 import { firestorePlugin } from 'vuefire'
 
+
 //Agregando iconos de bootstrap
 import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
 
