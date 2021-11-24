@@ -171,8 +171,8 @@ export default {
   data() {
     return {
       options: [
-        { item: "A", name: "Nuevo" },
-        { item: "B", name: "Usado" },
+        { item: "Nuevo", name: "Nuevo" },
+        { item: "Usado", name: "Usado" },
       ],
       selected: "",
       marca: "",
@@ -180,9 +180,9 @@ export default {
       pantalla: "",
       selected2: "",
       options2: [
-        { value: "A", text: "Android" },
-        { value: "B", text: "Ios" },
-        { value: "C", text: "Windows" },
+        { value: "Android", text: "Android" },
+        { value: "Ios", text: "Ios" },
+        { value: "Windows", text: "Windows" },
       ],
       memoria_int: "",
       memoria_ram: "",

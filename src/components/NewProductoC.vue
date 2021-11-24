@@ -95,8 +95,8 @@
         </div>
 
         <!-- formulario persona-->
-        <div v-if="contador != 0" class="container-fluid mt-5" >
-          <form-new-product 
+        <div v-if="contador != 0" class="container-fluid mt-5">
+          <form-new-product
             @getDatosPersona="datosPersona"
             class="centrado"
           ></form-new-product>
@@ -128,11 +128,9 @@
 
           <b-modal id="modal-1" hide-footer :title="this.datos_persona[0]">
             <b-row>
-                <b-spinner v-if="state_subida != false" variant="success" label="Spinning"></b-spinner>
               <b-col>
                 <label for="">{{ this.mensaje_vista_previa }}</label>
               </b-col>
-              
             </b-row>
             <b-row>
               <b-col v-if="state_subida != false">
@@ -151,17 +149,9 @@
     </b-row>
 
     <b-row v-if="state_contenedor === false">
-      <b-col>
-        <b-img
-          src="../assets/undraw_well_done_i2wr.svg"
-          width="400"
-          height="500"
-        ></b-img>
-      </b-col>
-      <b-col cols="7">
+      <b-col cols="12" sm="12" lg="12" xl="12" xxl="12">
         <label for="" class="centrado mt-5"
-          >Tu anuncio ya se encuentra activo, ve a la pagina principal para
-          poder verlo</label
+          >¡Felicidades!, tu anuncio ya se encuentra activo</label
         >
         <router-link
           to="/"
@@ -185,9 +175,25 @@
                 d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"
               />
             </svg>
-            Ir a inicio
+            INICIO
           </b-button>
         </router-link>
+      </b-col>
+
+      <b-col cols="12" sm="12" lg="6" xl="6" xxl="6">
+        <b-img
+          src="../assets/undraw_well_done_i2wr.svg"
+          width="500"
+          height="500"
+          class="d-none d-lg-block d-xl-block d-xxl-block"
+        ></b-img>
+
+        <b-img
+          src="../assets/undraw_well_done_i2wr.svg"
+          width="320"
+          height="250"
+          class="d-block d-lg-none d-xl-none d-xxl-none"
+        ></b-img>
       </b-col>
     </b-row>
   </div>
@@ -232,7 +238,7 @@ export default {
       state_contenedor: true,
 
       //modelos para vista previa img
-      mensaje_vista_previa: "Creando anuncio...",
+      mensaje_vista_previa: "Espera un momento...",
       src_card: null,
       titulo_card: "",
       precio_card: "",
