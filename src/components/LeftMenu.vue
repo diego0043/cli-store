@@ -59,8 +59,16 @@
 
       <b-row>
         <b-col>
-          <b-button  @click="set_publicaciones_filtradas()" class="mb-1 mt-3 btn-style">
+          <b-button  @click="set_publicaciones_filtradas(false)" class="mb-1 mt-3 btn-style">
             Aplicar filtros
+          </b-button>
+        </b-col>
+      </b-row>
+
+      <b-row>
+        <b-col>
+          <b-button  @click="set_publicaciones_sin_filtro()" class="mb-1 mt-3 btn-style">
+            Quitar filtros
           </b-button>
         </b-col>
       </b-row>
@@ -98,8 +106,20 @@ export default {
 
   methods: {
 
-    set_publicaciones_filtradas() {
-      const estado = this.selected
+    set_publicaciones_sin_filtro(){
+      this.seleccion_marca = []
+      this.seleccion_sistema = []
+      this.seleccion_pantalla = []
+      this.selected = "Ambos"
+      this.set_publicaciones_filtradas(true)
+    },
+
+    set_publicaciones_filtradas(eliminar) {
+      
+      if(eliminar === true){
+        this.$emit("datos_filtrados", this.publicaciones)
+      }else{
+          const estado = this.selected
       const marca = this.seleccion_marca
       const sistema = this.seleccion_sistema
       const pantalla = this.seleccion_pantalla
@@ -129,13 +149,8 @@ export default {
                             //si se encuentra una coincidencia se agrega el elemento al array de publicaciones filtradas
                             if (element.pantalla === element_pantalla) {
                               data_filtrada.push(element);
-                            } else {
-                              console.log(
-                                "no se econtraron resultados para " +
-                                  element_pantalla +
-                                  " pulgadas"
-                              );
-                            }
+                            } 
+
                           });
 
                           //se omite el filtro de pantalla y se agrega la coincidencia si existe
@@ -143,12 +158,8 @@ export default {
                           //agregamos la coincidencia
                           data_filtrada.push(element);
                         }
-                      } else {
-                        console.log(
-                          "no se econtraron resultados para sistema " +
-                            element_sistema
-                        );
-                      }
+                      } 
+
                     });
 
                     //se omite filtro de sistema
@@ -160,13 +171,8 @@ export default {
                         //si se encuentra una coincidencia se agrega el elemento al array de publicaciones filtradas
                         if (element.pantalla === element_pantalla) {
                           data_filtrada.push(element);
-                        } else {
-                          console.log(
-                            "no se econtraron resultados para " +
-                              element_pantalla +
-                              " pulgadas"
-                          );
-                        }
+                        } 
+
                       });
 
                       //se omite el filtro de pantalla y se agrega la coincidencia si existe
@@ -175,11 +181,8 @@ export default {
                       data_filtrada.push(element);
                     }
                   }
-                } else {
-                  console.log(
-                    "no se encontraron resultados con la marca " + element.marca
-                  );
-                }
+                } 
+
               });
 
               //se omite el filtro de marca
@@ -196,13 +199,8 @@ export default {
                         //si se encuentra una coincidencia se agrega el elemento al array de publicaciones filtradas
                         if (element.pantalla === element_pantalla) {
                           data_filtrada.push(element);
-                        } else {
-                          console.log(
-                            "no se econtraron resultados para " +
-                              element_pantalla +
-                              " pulgadas"
-                          );
-                        }
+                        } 
+
                       });
 
                       //se omite el filtro de pantalla y se agrega la coincidencia si existe
@@ -210,11 +208,8 @@ export default {
                       //agregamos la coincidencia
                       data_filtrada.push(element);
                     }
-                  } else {
-                    console.log(
-                      "no se econtraron resultados para sistema " + element_sistema
-                    );
-                  }
+                  } 
+
                 });
 
                 //se omite filtro de sistema
@@ -226,13 +221,8 @@ export default {
                     //si se encuentra una coincidencia se agrega el elemento al array de publicaciones filtradas
                     if (element.pantalla === element_pantalla) {
                       data_filtrada.push(element);
-                    } else {
-                      console.log(
-                        "no se econtraron resultados para " +
-                          element_pantalla +
-                          " pulgadas"
-                      );
-                    }
+                    } 
+
                   });
 
                   //se omite el filtro de pantalla y se agrega la coincidencia si existe
@@ -263,13 +253,8 @@ export default {
                             //si se encuentra una coincidencia se agrega el elemento al array de publicaciones filtradas
                             if (element.pantalla === element_pantalla) {
                               data_filtrada.push(element);
-                            } else {
-                              console.log(
-                                "no se econtraron resultados para " +
-                                  element_pantalla +
-                                  " pulgadas"
-                              );
-                            }
+                            } 
+
                           });
 
                           //se omite el filtro de pantalla y se agrega la coincidencia si existe
@@ -277,12 +262,8 @@ export default {
                           //agregamos la coincidencia
                           data_filtrada.push(element);
                         }
-                      } else {
-                        console.log(
-                          "no se econtraron resultados para sistema " +
-                            element_sistema
-                        );
-                      }
+                      } 
+
                     });
 
                     //se omite filtro de sistema
@@ -294,13 +275,8 @@ export default {
                         //si se encuentra una coincidencia se agrega el elemento al array de publicaciones filtradas
                         if (element.pantalla === element_pantalla) {
                           data_filtrada.push(element);
-                        } else {
-                          console.log(
-                            "no se econtraron resultados para " +
-                              element_pantalla +
-                              " pulgadas"
-                          );
-                        }
+                        } 
+
                       });
 
                       //se omite el filtro de pantalla y se agrega la coincidencia si existe
@@ -309,11 +285,8 @@ export default {
                       data_filtrada.push(element);
                     }
                   }
-                } else {
-                  console.log(
-                    "no se encontraron resultados con la marca " + element.marca
-                  );
-                }
+                } 
+
               });
 
               //se omite el filtro de marca
@@ -344,11 +317,8 @@ export default {
                       //agregamos la coincidencia
                       data_filtrada.push(element);
                     }
-                  } else {
-                    console.log(
-                      "no se econtraron resultados para sistema " + element_sistema
-                    );
-                  }
+                  } 
+
                 });
 
                 //se omite filtro de sistema
@@ -360,13 +330,8 @@ export default {
                     //si se encuentra una coincidencia se agrega el elemento al array de publicaciones filtradas
                     if (element.pantalla === element_pantalla) {
                       data_filtrada.push(element);
-                    } else {
-                      console.log(
-                        "no se econtraron resultados para " +
-                          element_pantalla +
-                          " pulgadas"
-                      );
-                    }
+                    } 
+
                   });
 
                   //se omite el filtro de pantalla y se agrega la coincidencia si existe
@@ -380,8 +345,10 @@ export default {
         }
       });
 
-      console.log(data_filtrada)
+      this.$emit("datos_filtrados", data_filtrada);
+      }
 
+      
     },
   },
 };

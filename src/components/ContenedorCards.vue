@@ -1,197 +1,270 @@
 <template>
   <div class="mt-3 p-2">
-    <b-row
-      class="filtros-secundarios mb-3 d-none d-lg-block d-xl-block d-xxl-block"
-    >
-      <!-- precios -->
-      <b-col
-        cols="6"
-        class="d-none d-lg-inline-block d-xl-inline-block d-xxl-inline-block"
-      >
-        <b-row>
-          <b-col>
-            <b-row>
-              <b-col class="filtro">
-                <b-row>
-                  <b-col cols="4">
-                    <label for="" class="labels-text mt-1">Desde</label>
-                  </b-col>
-                  <b-col cols="6">
-                    <b-form-input
-                      id="input-horizontal"
-                      size="sm"
-                      class="input-rango-precio"
-                    ></b-form-input>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      class="bi bi-currency-dollar icon"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718H4zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73l.348.086z"
-                      />
-                    </svg>
-                  </b-col>
-                </b-row>
-              </b-col>
-
-              <b-col class="filtro">
-                <b-row>
-                  <b-col cols="4">
-                    <label for="" class="labels-text mt-1">Hasta</label>
-                  </b-col>
-                  <b-col cols="6">
-                    <b-form-input
-                      id="input-horizontal"
-                      size="sm"
-                      class="input-rango-precio"
-                    ></b-form-input>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      class="bi bi-currency-dollar icon"
-                      viewBox="0 0 16 16"
-                    >
-                      <path
-                        d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718H4zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73l.348.086z"
-                      />
-                    </svg>
-                  </b-col>
-                </b-row>
-              </b-col>
-            </b-row>
-          </b-col>
-        </b-row>
-      </b-col>
-
-      <!-- ordenar por: -->
-      <b-col
-        cols="6"
-        class="
-          final-filtro1
-          d-none d-lg-inline-block d-xl-inline-block d-xxl-inline-block
-        "
-      >
-        <b-row>
-          <b-col>
-            <b-row>
-              <b-col>
-                <b-row>
-                  <b-col>
-                    <label for="" class="labels-text mt-1">Ordenar por:</label>
-                  </b-col>
-                </b-row>
-              </b-col>
-
-              <b-col>
-                <b-row>
-                  <b-col>
-                    <b-button size="sm" block>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        fill="currentColor"
-                        class="bi bi-filter-left"
-                        viewBox="0 0 16 16"
-                      >
-                        <path
-                          d="M2 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"
-                        />
-                      </svg>
-                      Precio</b-button
-                    >
-                  </b-col>
-                </b-row>
-              </b-col>
-
-              <b-col>
-                <b-row>
-                  <b-col>
-                    <b-button size="sm" block>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        fill="currentColor"
-                        class="bi bi-calendar-event"
-                        viewBox="0 0 16 16"
-                      >
-                        <path
-                          d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z"
-                        />
-                        <path
-                          d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"
-                        />
-                      </svg>
-                      Fecha</b-button
-                    >
-                  </b-col>
-                </b-row>
-              </b-col>
-            </b-row>
-          </b-col>
-        </b-row>
-      </b-col>
-    </b-row>
-
     <b-row>
-      <b-col
-        class=""
-        xl="3"
-        xxl="3"
-        sm="6"
-        cols="6"
-        v-for="(pub, key) in publicaciones"
-        :key="key"
-      >
-        <!-- cards -->
-        <b-container class="card-style mb-2">
+      <b-col cols="3 d-none d-xl-block d-xxl-block">
+        <left-menu @datos_filtrados="datosFiltrados"></left-menu>
+      </b-col>
 
-          <b-row class="contenedor-imagen-card">
-            <b-col>
-              <b-img :src="pub.portada" class="mt-2 img-size"> </b-img>
-            </b-col>
-          </b-row>
+      <b-col v-if="state_no_data != true">
+        <b-row
+          class="
+            filtros-secundarios
+            mb-3
+            d-none d-lg-block d-xl-block d-xxl-block
+          "
+        >
+          <!-- precios -->
+          <b-col
+            cols="6"
+            class="
+              d-none d-lg-inline-block d-xl-inline-block d-xxl-inline-block
+            "
+          >
+            <b-row>
+              <b-col>
+                <b-row>
+                  <b-col class="filtro">
+                    <b-row>
+                      <b-col cols="4">
+                        <label for="" class="labels-text mt-1">Desde</label>
+                      </b-col>
+                      <b-col cols="6">
+                        <b-form-input
+                          id="input-horizontal"
+                          size="sm"
+                          class="input-rango-precio"
+                        ></b-form-input>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="currentColor"
+                          class="bi bi-currency-dollar icon"
+                          viewBox="0 0 16 16"
+                        >
+                          <path
+                            d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718H4zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73l.348.086z"
+                          />
+                        </svg>
+                      </b-col>
+                    </b-row>
+                  </b-col>
 
-          <!-- titulo -->
-          <b-row>
-            <b-col>
-              <label for="" class="mt-2 titulo-card">{{
-                pub.titulo
-              }}</label>
-            </b-col>
-          </b-row>
+                  <b-col class="filtro">
+                    <b-row>
+                      <b-col cols="4">
+                        <label for="" class="labels-text mt-1">Hasta</label>
+                      </b-col>
+                      <b-col cols="6">
+                        <b-form-input
+                          id="input-horizontal"
+                          size="sm"
+                          class="input-rango-precio"
+                        ></b-form-input>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          fill="currentColor"
+                          class="bi bi-currency-dollar icon"
+                          viewBox="0 0 16 16"
+                        >
+                          <path
+                            d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718H4zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73l.348.086z"
+                          />
+                        </svg>
+                      </b-col>
+                    </b-row>
+                  </b-col>
+                </b-row>
+              </b-col>
+            </b-row>
+          </b-col>
 
-          <!-- precio-->
-          <b-row>
-            <b-col>
-              <label for="" class="label-precio"
-                >${{ pub.precio }}</label
-              >
-            </b-col>
-          </b-row>
+          <!-- ordenar por: -->
+          <b-col
+            cols="6"
+            class="
+              final-filtro1
+              d-none d-lg-inline-block d-xl-inline-block d-xxl-inline-block
+            "
+          >
+            <b-row>
+              <b-col>
+                <b-row>
+                  <b-col>
+                    <b-row>
+                      <b-col>
+                        <label for="" class="labels-text mt-1"
+                          >Ordenar por:</label
+                        >
+                      </b-col>
+                    </b-row>
+                  </b-col>
 
-          <b-row>
-            <b-col>
-              <b-button
-                size="sm"
-                variant="light"
-                class="ml-2 btn-style"
-                @click="obtenerUrlImagenes(publicaciones)"
-                >Comprar</b-button
-              >
-            </b-col>
-            <b-col>
-              <label for="" class="time-publicacion">Hace 5 min</label>
-            </b-col>
-          </b-row>
-        </b-container>
+                  <b-col>
+                    <b-row>
+                      <b-col>
+                        <b-button size="sm" block>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            fill="currentColor"
+                            class="bi bi-filter-left"
+                            viewBox="0 0 16 16"
+                          >
+                            <path
+                              d="M2 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"
+                            />
+                          </svg>
+                          Precio</b-button
+                        >
+                      </b-col>
+                    </b-row>
+                  </b-col>
+
+                  <b-col>
+                    <b-row>
+                      <b-col>
+                        <b-button size="sm" block>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            fill="currentColor"
+                            class="bi bi-calendar-event"
+                            viewBox="0 0 16 16"
+                          >
+                            <path
+                              d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z"
+                            />
+                            <path
+                              d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"
+                            />
+                          </svg>
+                          Fecha</b-button
+                        >
+                      </b-col>
+                    </b-row>
+                  </b-col>
+                </b-row>
+              </b-col>
+            </b-row>
+          </b-col>
+        </b-row>
+
+        <b-row class="d-block d-lg-none d-xl-none d-xxl-none">
+
+
+          <b-col cols="12" class="mb-3">
+            <b-button v-b-toggle.collapse-1 variant="secondary" class="mr-2"
+              >Ordenar por </b-button>
+
+              <b-button v-b-toggle.collapse-2 variant="secondary"
+              >Filtros 
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter" viewBox="0 0 16 16">
+  <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
+</svg>
+              </b-button>
+
+          </b-col>
+
+          <b-col cols="12"> 
+
+            <b-collapse id="collapse-1" class="mt-2 mb-2">
+              <b-card>
+                <p class="card-text">¿Como quieres ordenar las publicaciones?</p>
+                <b-button v-b-toggle.collapse-1-inner size="sm"
+                  >Toggle Inner Collapse</b-button
+                >
+                <b-collapse id="collapse-1-inner" class="mt-2">
+                  <b-card>Hello!</b-card>
+                </b-collapse>
+              </b-card>
+            </b-collapse>
+            
+            <b-collapse id="collapse-2" class="mt-2 mb-2">
+              <b-card>
+                <p class="card-text">Collapse contents Here</p>
+                <b-button v-b-toggle.collapse-1-inner size="sm"
+                  >Toggle Inner Collapse</b-button
+                >
+                <b-collapse id="collapse-1-inner" class="mt-2">
+                  <b-card>Hello!</b-card>
+                </b-collapse>
+              </b-card>
+            </b-collapse>
+          </b-col>
+        </b-row>
+
+        <b-row>
+          <b-col
+            class=""
+            xl="3"
+            xxl="3"
+            sm="6"
+            cols="6"
+            v-for="(pub, key) in publicaciones"
+            :key="key"
+          >
+            <!-- cards -->
+            <b-container class="card-style mb-2">
+              <b-row class="contenedor-imagen-card">
+                <b-col>
+                  <b-img :src="pub.portada" class="mt-2 img-size"> </b-img>
+                </b-col>
+              </b-row>
+
+              <!-- titulo -->
+              <b-row>
+                <b-col>
+                  <label for="" class="mt-2 titulo-card">{{
+                    pub.titulo
+                  }}</label>
+                </b-col>
+              </b-row>
+
+              <!-- precio-->
+              <b-row>
+                <b-col>
+                  <label for="" class="label-precio">${{ pub.precio }}</label>
+                </b-col>
+              </b-row>
+
+              <b-row>
+                <b-col>
+                  <b-button
+                    size="sm"
+                    variant="light"
+                    class="ml-2 btn-style"
+                    @click="obtenerUrlImagenes(publicaciones)"
+                    >Comprar</b-button
+                  >
+                </b-col>
+                <b-col>
+                  <label for="" class="time-publicacion">Hace 5 min</label>
+                </b-col>
+              </b-row>
+            </b-container>
+          </b-col>
+        </b-row>
+      </b-col>
+
+      <b-col class="mt-4" v-if="state_no_data === true">
+        <b-row>
+          <b-col>
+            <p class="fs-1">No se han encontrado resultados.</p>
+          </b-col>
+        </b-row>
+        <b-row>
+          <b-col>
+            <b-img
+              src="../assets/undraw_no_data_re_kwbl.svg"
+              width="400"
+            ></b-img>
+          </b-col>
+        </b-row>
       </b-col>
     </b-row>
   </div>
@@ -199,14 +272,19 @@
 
 <script>
 import { db } from "../db";
+import LeftMenu from "./LeftMenu.vue";
 
 export default {
   name: "ContenedorCards",
+
+  components: {
+    LeftMenu,
+  },
+
   data() {
     return {
       publicaciones: [],
-      array_publicaciones: [],
-      ret: null,
+      state_no_data: false,
     };
   },
 
@@ -214,7 +292,16 @@ export default {
     publicaciones: db.collection("publicaciones"),
   },
 
-  methods: {},
+  methods: {
+    datosFiltrados(lista_publicaciones) {
+      if (lista_publicaciones.length > 0) {
+        this.publicaciones = lista_publicaciones;
+        this.state_no_data = false;
+      } else {
+        this.state_no_data = true;
+      }
+    },
+  },
 };
 </script>
 
@@ -248,7 +335,7 @@ export default {
   max-height: 100px;
 }
 
-.contenedor-imagen-card{
+.contenedor-imagen-card {
   height: 100px;
   max-height: 100px;
 }

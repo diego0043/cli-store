@@ -3,9 +3,6 @@
     <!-- Agregar todo lo restante aca -->
     <div class="container-fluid">
       <b-row>
-        <b-col cols="3 d-none d-xl-block d-xxl-block">
-          <left-menu></left-menu>
-        </b-col>
         <b-col>
           <contenedor-cards></contenedor-cards>
         </b-col>
@@ -15,13 +12,27 @@
 </template>
 
 <script>
-import LeftMenu from "./LeftMenu.vue";
 import ContenedorCards from './ContenedorCards.vue'
 export default {
   name: "ContainerPrincipal",
   components: {
-    LeftMenu,
     ContenedorCards
+  },
+
+  data() {
+    return {
+      publicaciones_filtradas: null
+    }
+  },
+
+  methods: {
+
+    datosFiltrados(lista_publicaciones){
+      this.publicaciones_filtradas = lista_publicaciones 
+      console.log('estoy aca')
+      console.log(lista_publicaciones)  
+    }
+
   },
 };
 </script>
