@@ -77,7 +77,7 @@ export default {
       listaMarcas: ["Samsung", "Nokia", "Huawei", "iPhone", "Xiaomi"],
       listaSistemas: ["Android", "Windows", "ios"],
       listaPantallas: ["6", "5.5", "5"],
-      selected: null,
+      selected: 'Ambos',
       options: [
         { value: "Nuevo", text: "Nuevo" },
         { value: "Usado", text: "Usado" },
@@ -97,6 +97,7 @@ export default {
   },
 
   methods: {
+
     set_publicaciones_filtradas() {
       const estado = this.selected
       const marca = this.seleccion_marca
@@ -106,159 +107,286 @@ export default {
       let data_filtrada = []
 
       //Comenzamos a filtrar por estado
-      publicaciones.forEach(element => {
-
+      publicaciones.forEach((element) => {
         //comprobamos que haya seleccionado un estado de telefono
-        if(estado != 'Ambos'){
-
+        if (estado != "Ambos") {
           //seleccionara solo nuevos o usados dependiendo del filtro que se selecciono
-          if(element.estado === estado){
-
-            //Verificamos si vamos a filtrar por marca o no
-            if(marca.length != 0){
-
+          if (element.estado === estado) {
+            //verificamos que tambien se filtrara por marcas de lo contrario lo omitimos
+            if (marca.length != 0) {
               //iteramos las marcas que selecciono el usuario hasta encontrar coincidencias
-              marca.forEach( element_marca => {
-              
-              if(element.marca === element_marca){
-
-                  //iteramos los sistemas que selecciono el usuario hasta encontrar coincidencias
-                  sistema.forEach( element_sistema => {
-
-                      
-                      if(element.sistema === element_sistema){
-                        
-                        //iteramos tamaños de pantalla que selecciono el usuario hasta encontrar coincidencias
-                        pantalla.forEach( element_pantalla => {
-
+              marca.forEach((element_marca) => {
+                if (element.marca === element_marca) {
+                  //verificamos si se filtrara por sistema
+                  if (sistema.length != 0) {
+                    //iteramos los sistemas que selecciono el usuario hasta encontrar coincidencias
+                    sistema.forEach((element_sistema) => {
+                      if (element.sistema === element_sistema) {
+                        //verificamos si se va a filtrar por pantalla
+                        if (pantalla.length != 0) {
+                          //iteramos tamaños de pantalla que selecciono el usuario hasta encontrar coincidencias
+                          pantalla.forEach((element_pantalla) => {
                             //si se encuentra una coincidencia se agrega el elemento al array de publicaciones filtradas
-                            if(element.pantalla === element_pantalla){
-
-                              data_filtrada.push(element)
-
-                            }else{
-                              console.log('no se econtraron resultados para '+element_pantalla+' pulgadas')
+                            if (element.pantalla === element_pantalla) {
+                              data_filtrada.push(element);
+                            } else {
+                              console.log(
+                                "no se econtraron resultados para " +
+                                  element_pantalla +
+                                  " pulgadas"
+                              );
                             }
-                        })
+                          });
 
-                      }else{
-                        console.log('no se econtraron resultados para sistema '+element_sistema)
+                          //se omite el filtro de pantalla y se agrega la coincidencia si existe
+                        } else {
+                          //agregamos la coincidencia
+                          data_filtrada.push(element);
+                        }
+                      } else {
+                        console.log(
+                          "no se econtraron resultados para sistema " +
+                            element_sistema
+                        );
                       }
-                  })
+                    });
 
-              }else{
-                console.log('no se encontraron resultados con la marca '+element.marca)
-              }
+                    //se omite filtro de sistema
+                  } else {
+                    //verificamos si se va a filtrar por pantalla
+                    if (pantalla.length != 0) {
+                      //iteramos tamaños de pantalla que selecciono el usuario hasta encontrar coincidencias
+                      pantalla.forEach((element_pantalla) => {
+                        //si se encuentra una coincidencia se agrega el elemento al array de publicaciones filtradas
+                        if (element.pantalla === element_pantalla) {
+                          data_filtrada.push(element);
+                        } else {
+                          console.log(
+                            "no se econtraron resultados para " +
+                              element_pantalla +
+                              " pulgadas"
+                          );
+                        }
+                      });
 
-              }) 
+                      //se omite el filtro de pantalla y se agrega la coincidencia si existe
+                    } else {
+                      //agregamos la coincidencia
+                      data_filtrada.push(element);
+                    }
+                  }
+                } else {
+                  console.log(
+                    "no se encontraron resultados con la marca " + element.marca
+                  );
+                }
+              });
 
-            }else{
-
-              //verificamos si vamos a filtrar por sistema
-              if(sistema.length != 0){
+              //se omite el filtro de marca
+            } else {
+              //verificamos si se filtrara por sistema
+              if (sistema.length != 0) {
                 //iteramos los sistemas que selecciono el usuario hasta encontrar coincidencias
-                  sistema.forEach( element_sistema => {
+                sistema.forEach((element_sistema) => {
+                  if (element.sistema === element_sistema) {
+                    //verificamos si se va a filtrar por pantalla
+                    if (pantalla.length != 0) {
+                      //iteramos tamaños de pantalla que selecciono el usuario hasta encontrar coincidencias
+                      pantalla.forEach((element_pantalla) => {
+                        //si se encuentra una coincidencia se agrega el elemento al array de publicaciones filtradas
+                        if (element.pantalla === element_pantalla) {
+                          data_filtrada.push(element);
+                        } else {
+                          console.log(
+                            "no se econtraron resultados para " +
+                              element_pantalla +
+                              " pulgadas"
+                          );
+                        }
+                      });
 
-                      
-                      if(element.sistema === element_sistema){
-                        
-                        //iteramos tamaños de pantalla que selecciono el usuario hasta encontrar coincidencias
-                        pantalla.forEach( element_pantalla => {
+                      //se omite el filtro de pantalla y se agrega la coincidencia si existe
+                    } else {
+                      //agregamos la coincidencia
+                      data_filtrada.push(element);
+                    }
+                  } else {
+                    console.log(
+                      "no se econtraron resultados para sistema " + element_sistema
+                    );
+                  }
+                });
 
-                            //si se encuentra una coincidencia se agrega el elemento al array de publicaciones filtradas
-                            if(element.pantalla === element_pantalla){
+                //se omite filtro de sistema
+              } else {
+                //verificamos si se va a filtrar por pantalla
+                if (pantalla.length != 0) {
+                  //iteramos tamaños de pantalla que selecciono el usuario hasta encontrar coincidencias
+                  pantalla.forEach((element_pantalla) => {
+                    //si se encuentra una coincidencia se agrega el elemento al array de publicaciones filtradas
+                    if (element.pantalla === element_pantalla) {
+                      data_filtrada.push(element);
+                    } else {
+                      console.log(
+                        "no se econtraron resultados para " +
+                          element_pantalla +
+                          " pulgadas"
+                      );
+                    }
+                  });
 
-                              data_filtrada.push(element)
-
-                            }else{
-                              console.log('no se econtraron resultados para '+element_pantalla+' pulgadas')
-                            }
-                        })
-
-                      }else{
-                        console.log('no se econtraron resultados para sistema '+element_sistema)
-                      }
-                  })
-              }else{
-                //verificamos si vamos a filtrar por pantalla o no 
-                if(pantalla.length != 0){
-                  pantalla.forEach( element_pantalla => {
-
-                      //si se encuentra una coincidencia se agrega el elemento al array de publicaciones filtradas
-                      if(element.pantalla === element_pantalla){
-
-                        data_filtrada.push(element)
-
-                      }else{
-                        console.log('no se econtraron resultados para '+element_pantalla+' pulgadas')
-                      }
-                  })
+                  //se omite el filtro de pantalla y se agrega la coincidencia si existe
+                } else {
+                  //agregamos la coincidencia
+                  data_filtrada.push(element);
                 }
               }
-              
             }
-                  
-          }else{
-
-            //filtrar solo por estado
-            console.log('filarfr')
           }
-        }else{
 
-          //aca no importa si es nuevo o usado 
-          if (estado === 'Ambos' || estado === null){
-
-            marca.forEach( element_marca => {
-              if(element.marca === element_marca){
-
-                  //iteramos los sistemas que selecciono el usuario hasta encontrar coincidencias
-                  sistema.forEach( element_sistema => {
-
-                      
-                      if(element.sistema === element_sistema){
-                        
-                        //iteramos tamaños de pantalla que selecciono el usuario hasta encontrar coincidencias
-                        pantalla.forEach( element_pantalla => {
-
+        } else {
+          //aca no importa si es nuevo o usado
+          if (estado === "Ambos" || estado === 'null') {
+            if (marca.length != 0) {
+              //iteramos las marcas que selecciono el usuario hasta encontrar coincidencias
+              marca.forEach((element_marca) => {
+                if (element.marca === element_marca) {
+                  //verificamos si se filtrara por sistema
+                  if (sistema.length != 0) {
+                    //iteramos los sistemas que selecciono el usuario hasta encontrar coincidencias
+                    sistema.forEach((element_sistema) => {
+                      if (element.sistema === element_sistema) {
+                        //verificamos si se va a filtrar por pantalla
+                        if (pantalla.length != 0) {
+                          //iteramos tamaños de pantalla que selecciono el usuario hasta encontrar coincidencias
+                          pantalla.forEach((element_pantalla) => {
                             //si se encuentra una coincidencia se agrega el elemento al array de publicaciones filtradas
-                            if(element.pantalla === element_pantalla){
-
-                              data_filtrada.push(element)
-
-                            }else{
-                              console.log('no se econtraron resultados para '+element_pantalla+' pulgadas')
+                            if (element.pantalla === element_pantalla) {
+                              data_filtrada.push(element);
+                            } else {
+                              console.log(
+                                "no se econtraron resultados para " +
+                                  element_pantalla +
+                                  " pulgadas"
+                              );
                             }
-                        })
+                          });
 
-                      }else{
-                        console.log('no se econtraron resultados para sistema '+element_sistema)
+                          //se omite el filtro de pantalla y se agrega la coincidencia si existe
+                        } else {
+                          //agregamos la coincidencia
+                          data_filtrada.push(element);
+                        }
+                      } else {
+                        console.log(
+                          "no se econtraron resultados para sistema " +
+                            element_sistema
+                        );
                       }
-                  })
+                    });
 
-              }else{
-                console.log('no se encontraron resultados con la marca '+element.marca)
+                    //se omite filtro de sistema
+                  } else {
+                    //verificamos si se va a filtrar por pantalla
+                    if (pantalla.length != 0) {
+                      //iteramos tamaños de pantalla que selecciono el usuario hasta encontrar coincidencias
+                      pantalla.forEach((element_pantalla) => {
+                        //si se encuentra una coincidencia se agrega el elemento al array de publicaciones filtradas
+                        if (element.pantalla === element_pantalla) {
+                          data_filtrada.push(element);
+                        } else {
+                          console.log(
+                            "no se econtraron resultados para " +
+                              element_pantalla +
+                              " pulgadas"
+                          );
+                        }
+                      });
+
+                      //se omite el filtro de pantalla y se agrega la coincidencia si existe
+                    } else {
+                      //agregamos la coincidencia
+                      data_filtrada.push(element);
+                    }
+                  }
+                } else {
+                  console.log(
+                    "no se encontraron resultados con la marca " + element.marca
+                  );
+                }
+              });
+
+              //se omite el filtro de marca
+            } else {
+              //verificamos si se filtrara por sistema
+              if (sistema.length != 0) {
+                //iteramos los sistemas que selecciono el usuario hasta encontrar coincidencias
+                sistema.forEach((element_sistema) => {
+                  if (element.sistema === element_sistema) {
+                    //verificamos si se va a filtrar por pantalla
+                    if (pantalla.length != 0) {
+                      //iteramos tamaños de pantalla que selecciono el usuario hasta encontrar coincidencias
+                      pantalla.forEach((element_pantalla) => {
+                        //si se encuentra una coincidencia se agrega el elemento al array de publicaciones filtradas
+                        if (element.pantalla === element_pantalla) {
+                          data_filtrada.push(element);
+                        } else {
+                          console.log(
+                            "no se econtraron resultados para " +
+                              element_pantalla +
+                              " pulgadas"
+                          );
+                        }
+                      });
+
+                      //se omite el filtro de pantalla y se agrega la coincidencia si existe
+                    } else {
+                      //agregamos la coincidencia
+                      data_filtrada.push(element);
+                    }
+                  } else {
+                    console.log(
+                      "no se econtraron resultados para sistema " + element_sistema
+                    );
+                  }
+                });
+
+                //se omite filtro de sistema
+              } else {
+                //verificamos si se va a filtrar por pantalla
+                if (pantalla.length != 0) {
+                  //iteramos tamaños de pantalla que selecciono el usuario hasta encontrar coincidencias
+                  pantalla.forEach((element_pantalla) => {
+                    //si se encuentra una coincidencia se agrega el elemento al array de publicaciones filtradas
+                    if (element.pantalla === element_pantalla) {
+                      data_filtrada.push(element);
+                    } else {
+                      console.log(
+                        "no se econtraron resultados para " +
+                          element_pantalla +
+                          " pulgadas"
+                      );
+                    }
+                  });
+
+                  //se omite el filtro de pantalla y se agrega la coincidencia si existe
+                } else {
+                  //agregamos la coincidencia
+                  data_filtrada.push(element);
+                }
               }
-
-            })
-
+            }
           }
-          
         }
       });
 
-      this.publicaciones = []
-      this.publicaciones = data_filtrada
-      console.log(this.publicaciones)
+      console.log(data_filtrada)
 
-
-
-
-
-
-      //estado = this.selected
     },
   },
 };
+
+
 </script>
 
 <style scoped>
