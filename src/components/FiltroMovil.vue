@@ -4,15 +4,13 @@
       display: none
       class="
         mt-4
-        overflow-auto
         menuIzquierdo
-        d-none d-xl-block d-xxl-block
-        ml-4
+        d-block d-lg-none d-xl-none d-xxl-none
       "
     >
       <b-row>
         <b-col>
-          <b-img src="../assets/undraw_checklist__re_2w7v.svg" width="150"></b-img>
+          <b-img src="../assets/undraw_checklist__re_2w7v.svg" width="200"></b-img>
         </b-col>
       </b-row>
       
@@ -338,56 +336,17 @@ export default {
 
 <style scoped>
 .menuIzquierdo {
-  height: 82vh;
-  width: 250px;
+  width: 100%;
   scroll-behavior: smooth;
-  position: fixed;
 }
 
 .items {
   background-color: #b4846c;
 }
 
-::-webkit-scrollbar {
-  width: 5px;
-  height: 40px;
-}
 
-::-webkit-scrollbar-track {
-  background: #f6f6f6;
-}
 
-::-webkit-scrollbar-thumb {
-  background: #d4b499;
-  border-radius: 20px;
-}
 
-.btn-style {
-  background: #b4846c;
-  color: white;
-  border: none;
-}
 
-.btn-style:hover {
-  background: #a8775f;
-  color: white;
-}
-
-.btn-style:focus {
-  background: #a8775f;
-  color: white;
-  box-shadow: none;
-}
-
-.container-marcas{
-  border: none;
-  border-left: 1px solid #b4846c;
-  border-right: 1px solid #b4846c;
-}
-
-.texts{
-  font-size: 1rem;
-  color: #6c757d;
-}
 
 </style>

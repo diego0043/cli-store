@@ -16,7 +16,7 @@
           >
             <b-carousel-slide
               class="img-tam"
-              v-for="(imagen, key) in images"
+              v-for="(imagen, key) in url"
               fade
               img-height="100%"
               img-width="100%"
@@ -37,7 +37,6 @@
 export default {
   name: "Carousel",
   props: {
-    images: Array,
     url: Array,
   },
   data() {
@@ -53,9 +52,12 @@ export default {
 
 
 .img-tam{
-  max-width: 400px;
-  max-height: 250px;
-  min-width: 100px;
-  min-height: 100px;
+ 
+  max-width: 600px;
+  max-height: 300px;
+  min-width: 300px;
+  min-height: 300px;
+ 
+  
 }
 </style>

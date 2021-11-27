@@ -5,6 +5,87 @@
         <left-menu @datos_filtrados="datosFiltrados"></left-menu>
       </b-col>
 
+      <b-col cols="12" class="d-block d-lg-none d-xl-none d-xxl-none">
+        <b-row>
+          <b-col cols="12" class="mb-3">
+            <b-button v-b-toggle.collapse-1 variant="secondary" class="mr-2"
+              >Ordenar por:
+            </b-button>
+
+            <b-button v-b-toggle.collapse-2 variant="secondary"
+              >Filtros
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-filter"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"
+                />
+              </svg>
+            </b-button>
+          </b-col>
+
+          <b-col cols="12">
+            <b-collapse id="collapse-1" class="mt-2 mb-2">
+              <b-card>
+                <p class="card-text">
+                  ¿Como quieres ordenar las publicaciones?
+                </p>
+
+                <b-row>
+                  <b-col cols="12 " class="mb-2">
+                    <b-button>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        class="bi bi-filter-left"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M2 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"
+                        />
+                      </svg>
+                      Ordenar por precio
+                    </b-button>
+                  </b-col>
+
+                  <b-col cols="12">
+                    <b-button>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        class="bi bi-calendar-event"
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z"
+                        />
+                        <path
+                          d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"
+                        />
+                      </svg>
+                      Ordenar por fecha
+                    </b-button>
+                  </b-col>
+                </b-row>
+              </b-card>
+            </b-collapse>
+
+            <b-collapse id="collapse-2" class="mt-2 mb-2">
+              <filtro-movil @datos_filtrados="datosFiltrados"></filtro-movil>
+            </b-collapse>
+          </b-col>
+        </b-row>
+      </b-col>
+
       <b-col v-if="state_no_data != true">
         <b-row
           class="
@@ -105,21 +186,11 @@
                   <b-col>
                     <b-row>
                       <b-col>
-                        <b-button size="sm" block>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="16"
-                            height="16"
-                            fill="currentColor"
-                            class="bi bi-filter-left"
-                            viewBox="0 0 16 16"
-                          >
-                            <path
-                              d="M2 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"
-                            />
-                          </svg>
-                          Precio</b-button
-                        >
+                        <b-form-select
+                          @change="ordenar_precio(state_ordernar_precio)"
+                          v-model="state_ordernar_precio"
+                          :options="options"
+                        ></b-form-select>
                       </b-col>
                     </b-row>
                   </b-col>
@@ -154,50 +225,6 @@
           </b-col>
         </b-row>
 
-        <b-row class="d-block d-lg-none d-xl-none d-xxl-none">
-
-
-          <b-col cols="12" class="mb-3">
-            <b-button v-b-toggle.collapse-1 variant="secondary" class="mr-2"
-              >Ordenar por </b-button>
-
-              <b-button v-b-toggle.collapse-2 variant="secondary"
-              >Filtros 
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-filter" viewBox="0 0 16 16">
-  <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
-</svg>
-              </b-button>
-
-          </b-col>
-
-          <b-col cols="12"> 
-
-            <b-collapse id="collapse-1" class="mt-2 mb-2">
-              <b-card>
-                <p class="card-text">¿Como quieres ordenar las publicaciones?</p>
-                <b-button v-b-toggle.collapse-1-inner size="sm"
-                  >Toggle Inner Collapse</b-button
-                >
-                <b-collapse id="collapse-1-inner" class="mt-2">
-                  <b-card>Hello!</b-card>
-                </b-collapse>
-              </b-card>
-            </b-collapse>
-            
-            <b-collapse id="collapse-2" class="mt-2 mb-2">
-              <b-card>
-                <p class="card-text">Collapse contents Here</p>
-                <b-button v-b-toggle.collapse-1-inner size="sm"
-                  >Toggle Inner Collapse</b-button
-                >
-                <b-collapse id="collapse-1-inner" class="mt-2">
-                  <b-card>Hello!</b-card>
-                </b-collapse>
-              </b-card>
-            </b-collapse>
-          </b-col>
-        </b-row>
-
         <b-row>
           <b-col
             class=""
@@ -209,10 +236,16 @@
             :key="key"
           >
             <!-- cards -->
-            <b-container class="card-style mb-2">
+            <b-container class="card-style mb-2 shadow">
               <b-row class="contenedor-imagen-card">
                 <b-col>
-                  <b-img :src="pub.portada" class="mt-2 img-size"> </b-img>
+                  <b-img
+                    :src="pub.portada"
+                    class="mt-2 img-size"
+                    fluid
+                    alt="Fluid image"
+                  >
+                  </b-img>
                 </b-col>
               </b-row>
 
@@ -237,12 +270,32 @@
                   <b-button
                     size="sm"
                     variant="light"
-                    class="ml-2 btn-style"
-                    @click="obtenerUrlImagenes(publicaciones)"
-                    >Comprar</b-button
+                    class="btn-style"
+                    v-b-modal.modal-xl
+                    @click="set_datos_modal(key)"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      class="bi bi-eye"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"
+                      />
+                      <path
+                        d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"
+                      />
+                    </svg>
+                    Ver mas</b-button
                   >
                 </b-col>
-                <b-col>
+                <b-col
+                  cols="5"
+                  class="d-none d-lg-block d-xl-block d-xxl-block"
+                >
                   <label for="" class="time-publicacion">Hace 5 min</label>
                 </b-col>
               </b-row>
@@ -267,24 +320,179 @@
         </b-row>
       </b-col>
     </b-row>
+
+    <!-- modal del producto -->
+
+    <b-modal id="modal-xl" size="xl" hide-footer>
+      <b-row>
+        <!--  carousel del anuncio -->
+        <b-col cols="12" lg="6" xl="6">
+          <carousel v-bind:url="imagenes_publicacion"></carousel>
+        </b-col>
+
+        <!--  datos del usuario y-->
+        <b-col cols="12" lg="6" xl="6">
+          <b-row class="text-center mt-3">
+            <b-col class="titulo_anuncio">
+              {{ anuncio_seleccionado.titulo }}
+            </b-col>
+          </b-row>
+
+          <b-row class="text-center mt-3">
+            <b-col> $ {{ anuncio_seleccionado.precio }} </b-col>
+          </b-row>
+
+          <b-row class="d-none d-lg-block d-xl-block">
+            <b-col>
+              <b-button> COMPRAR </b-button>
+            </b-col>
+          </b-row>
+
+          <b-row class="mt-3 ml-2">
+            <b-col> Vendedor: {{ anuncio_seleccionado.vendedor }} </b-col>
+            <b-col> Telefono: {{ anuncio_seleccionado.telefono }} </b-col>
+          </b-row>
+        </b-col>
+      </b-row>
+
+      <b-row class="text-center mt-5">
+        <b-col
+          cols="12 "
+          class="mt-5 mb-3 d-none d-lg-block d-xl-block d-xxl-block"
+          >DESCRIPCION Y ESPECIFICACIONES</b-col
+        >
+
+        <!-- especificaciones -->
+        <b-col cols="12" lg="6" xl="6" class="text-left">
+          <b-row class="shadow mr-1 ml-1 pt-2 pb-2 mb-3">
+            <b-col class="ml-5">
+              <b-row>
+                <b-col> Estado: </b-col>
+              </b-row>
+
+              <b-row>
+                <b-col> Marca: </b-col>
+              </b-row>
+
+              <b-row>
+                <b-col> Modelo: </b-col>
+              </b-row>
+
+              <b-row>
+                <b-col> Pantalla: </b-col>
+              </b-row>
+
+              <b-row>
+                <b-col> Sistema: </b-col>
+              </b-row>
+
+              <b-row>
+                <b-col> Memoria interna: </b-col>
+              </b-row>
+
+              <b-row>
+                <b-col> Memoria ram: </b-col>
+              </b-row>
+            </b-col>
+
+            <b-col>
+              <b-row>
+                <b-col> {{ anuncio_seleccionado.estado }} </b-col>
+              </b-row>
+
+              <b-row>
+                <b-col> {{ anuncio_seleccionado.marca }} </b-col>
+              </b-row>
+
+              <b-row>
+                <b-col> {{ anuncio_seleccionado.modelo }} </b-col>
+              </b-row>
+
+              <b-row>
+                <b-col> {{ anuncio_seleccionado.pantalla }} pulgadas </b-col>
+              </b-row>
+
+              <b-row>
+                <b-col> {{ anuncio_seleccionado.sistema }} </b-col>
+              </b-row>
+
+              <b-row>
+                <b-col> {{ anuncio_seleccionado.rom }} GB </b-col>
+              </b-row>
+
+              <b-row>
+                <b-col> {{ anuncio_seleccionado.ram }} GB </b-col>
+              </b-row>
+            </b-col>
+          </b-row>
+        </b-col>
+
+        <b-col cols="12" lg="6" xl="6" class="mb-3">
+          <b-row class="shadow mr-1 ml-1 pt-2 pb-2">
+            <b-col>
+              {{ anuncio_seleccionado.descripcion }}
+            </b-col>
+          </b-row>
+        </b-col>
+      </b-row>
+
+      <b-row class="fixed-bottom mb-1 d-block d-lg-none d-xl-none">
+        <b-col class="text-center">
+          <b-button size="lg"> Comprar </b-button>
+        </b-col>
+      </b-row>
+    </b-modal>
   </div>
 </template>
 
 <script>
 import { db } from "../db";
+import { storage } from "../db";
+
+const ref = storage.ref();
 import LeftMenu from "./LeftMenu.vue";
+import FiltroMovil from "./FiltroMovil.vue";
+import Carousel from "./Carousel.vue";
 
 export default {
   name: "ContenedorCards",
 
   components: {
     LeftMenu,
+    FiltroMovil,
+    Carousel,
   },
 
   data() {
     return {
       publicaciones: [],
+      copia_publicaciones: null,
       state_no_data: false,
+      state_ordernar_precio: null,
+
+      anuncio_seleccionado: {
+        titulo: "",
+        vendedor: "",
+        telefono: "",
+        descripcion: "",
+        estado: "",
+        marca: "",
+        modelo: "",
+        pantalla: "",
+        sistema: "",
+        rom: "",
+        ram: "",
+        precio: "",
+        id: "",
+        portada: "",
+      },
+
+      options: [
+        { value: "Ascendente", text: "Precio (Ascendente)" },
+        { value: "Descendente", text: "Precio (Descendente)" },
+      ],
+
+      imagenes_publicacion: [],
     };
   },
 
@@ -301,6 +509,72 @@ export default {
         this.state_no_data = true;
       }
     },
+
+    set_datos_modal(posicion) {
+      this.anuncio_seleccionado = this.publicaciones[posicion];
+      this.get_imagenes_publicacion(this.anuncio_seleccionado.id);
+    },
+
+    get_imagenes_publicacion(id) {
+      this.imagenes_publicacion = [];
+      ref
+        .child("/Imagenes/" + id)
+        .listAll()
+        .then((res) => {
+          res.items.map((item) => {
+            ref
+              .child(item.location.path_)
+              .getDownloadURL()
+              .then((url) => {
+                this.imagenes_publicacion.push(url);
+              });
+          });
+        });
+    },
+
+    ordenar_precio(Ascendente) {
+      //let publicaciones_ordernadas = []
+      let precios = [];
+      let precios_ordenada = null;
+      this.copia_publicaciones = this.publicaciones.slice()
+
+      if (Ascendente === "Descendente") {
+        this.publicaciones.forEach((element) => {
+          precios.push(element.precio);
+        });
+
+        //aca me quede
+        precios_ordenada = precios.sort((a, b) => {
+          return a - b;
+        });
+
+        console.log()
+
+
+       
+        this.publicaciones = []
+
+        precios_ordenada.forEach(element => {
+            this.copia_publicaciones.forEach(element2 => {
+              if(element === element2.precio){
+                this.publicaciones.push(element2)
+              }
+            })
+        })
+
+       //Ascendente
+      }else{
+        this.publicaciones.forEach((element) => {
+          precios.push(element.precio);
+        });
+
+        precios_ordenada = precios.sort((a, b) => {
+          return b - a;
+        });
+      }
+
+      console.log(precios_ordenada);
+    },
   },
 };
 </script>
@@ -315,29 +589,24 @@ export default {
 
 .card-style {
   height: 14.5rem;
-  background-color: #f6f6f6;
   transition: all 0.5s ease-in-out;
   transform: scale(1);
 }
 
 .card-style:hover {
   height: 14.5rem;
-  background-color: #f6f6f6;
   transition: all 0.5s ease-in-out;
-  transform: scale(1.04);
-  -webkit-box-shadow: 5px 5px 10px 1px rgba(0, 0, 0, 0.25);
-  -moz-box-shadow: 5px 5px 10px 1px rgba(0, 0, 0, 0.25);
-  box-shadow: 5px 5px 10px 1px rgba(0, 0, 0, 0.25);
+  transform: scale(1.1);
 }
 
 .img-size {
-  max-width: 100px;
-  max-height: 100px;
+  width: 9rem;
+  height: 6.1rem;
 }
 
 .contenedor-imagen-card {
-  height: 100px;
-  max-height: 100px;
+  max-width: 14rem;
+  max-height: 6rem;
 }
 
 .titulo-card {
@@ -350,13 +619,17 @@ export default {
 }
 
 .btn-style {
-  background: #b4846c;
-  color: white;
-  border: none;
+  background-color: white;
+  font-weight: bold;
+  color: #b4846c;
+  border: 1px solid #b4846c;
+  border-radius: 10px;
+  font-size: 12px;
 }
 
 .btn-style:hover {
   background: #a8775f;
+  border: 1px solid #a8775f;
   color: white;
 }
 
@@ -367,8 +640,23 @@ export default {
 }
 
 .time-publicacion {
+  margin-top: 5px;
   font-size: 12px;
   color: var(--gray);
+}
+
+.estado_cell {
+  background-color: #e6cca9;
+  padding: 0;
+  height: 21px;
+  margin-left: 20px;
+  margin-top: 5px;
+  font-size: 13px;
+  max-width: 60px;
+  border: 1px #b4846c;
+  border-radius: 10px;
+  color: white;
+  opacity: 5;
 }
 
 .filtros-secundarios {
@@ -396,5 +684,11 @@ export default {
 
 .input-rango-precio {
   text-indent: 15px;
+}
+
+.titulo-anuncio {
+  font-size: 2rem;
+  color: var(--gray);
+  font-weight: bold;
 }
 </style>

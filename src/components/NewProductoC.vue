@@ -32,7 +32,6 @@
               <b-row>
                 <b-col>
                   <carousel
-                    v-bind:images="imgs"
                     v-bind:url="img_urls"
                   ></carousel>
                 </b-col>
