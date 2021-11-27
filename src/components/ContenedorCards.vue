@@ -88,11 +88,7 @@
 
       <b-col v-if="state_no_data != true">
         <b-row
-          class="
-            filtros-secundarios
-            mb-3
-            d-none d-lg-block d-xl-block d-xxl-block
-          "
+          class="filtros-secundarios d-none d-lg-block d-xl-block d-xxl-block"
         >
           <!-- precios -->
           <b-col
@@ -102,59 +98,59 @@
             "
           >
             <b-row>
-                  <b-col class="filtro">
-                    <b-row>
-                      <b-col cols="4">
-                        <label for="" class="labels-text mt-1">Desde</label>
-                      </b-col>
-                      <b-col cols="6">
-                        <b-form-input
-                          id="input-horizontal"
-                          size="sm"
-                          class="input-rango-precio"
-                        ></b-form-input>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          fill="currentColor"
-                          class="bi bi-currency-dollar icon"
-                          viewBox="0 0 16 16"
-                        >
-                          <path
-                            d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718H4zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73l.348.086z"
-                          />
-                        </svg>
-                      </b-col>
-                    </b-row>
+              <b-col class="filtro">
+                <b-row>
+                  <b-col cols="4">
+                    <label for="" class="labels-text mt-1">Desde</label>
                   </b-col>
+                  <b-col cols="6">
+                    <b-form-input
+                      id="input-horizontal"
+                      size="sm"
+                      class="input-rango-precio"
+                    ></b-form-input>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      class="bi bi-currency-dollar icon"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718H4zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73l.348.086z"
+                      />
+                    </svg>
+                  </b-col>
+                </b-row>
+              </b-col>
 
-                  <b-col class="filtro">
-                    <b-row>
-                      <b-col cols="4">
-                        <label for="" class="labels-text mt-1">Hasta</label>
-                      </b-col>
-                      <b-col cols="6">
-                        <b-form-input
-                          id="input-horizontal"
-                          size="sm"
-                          class="input-rango-precio"
-                        ></b-form-input>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          fill="currentColor"
-                          class="bi bi-currency-dollar icon"
-                          viewBox="0 0 16 16"
-                        >
-                          <path
-                            d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718H4zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73l.348.086z"
-                          />
-                        </svg>
-                      </b-col>
-                    </b-row>
+              <b-col class="filtro">
+                <b-row>
+                  <b-col cols="4">
+                    <label for="" class="labels-text mt-1">Hasta</label>
                   </b-col>
+                  <b-col cols="6">
+                    <b-form-input
+                      id="input-horizontal"
+                      size="sm"
+                      class="input-rango-precio"
+                    ></b-form-input>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      class="bi bi-currency-dollar icon"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718H4zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73l.348.086z"
+                      />
+                    </svg>
+                  </b-col>
+                </b-row>
+              </b-col>
             </b-row>
           </b-col>
 
@@ -222,18 +218,15 @@
           </b-col>
         </b-row>
 
-        <b-row>
+        <b-row class="mt-4 mb-2">
           <b-col
-            class=""
-            xl="3"
-            xxl="3"
-            sm="6"
             cols="6"
             v-for="(pub, key) in publicaciones"
             :key="key"
+            class="d-block d-lg-none d-xl-none d-xxl-none"
           >
             <!-- cards -->
-            <b-container class="card-style mb-2 shadow">
+            <b-container class="card-style-pc shadow">
               <b-row class="contenedor-imagen-card">
                 <b-col>
                   <b-img
@@ -294,6 +287,100 @@
                   class="d-none d-lg-block d-xl-block d-xxl-block"
                 >
                   <label for="" class="time-publicacion">Hace 5 min</label>
+                </b-col>
+              </b-row>
+            </b-container>
+          </b-col>
+        </b-row>
+
+        <!-- vista pc -->
+        <b-row class="mt-4 mb-2">
+          <b-col
+            cols="6"
+            v-for="(pub, key) in publicaciones"
+            :key="key"
+            class="d-none d-lg-block d-xl-block d-xxl-block"
+          >
+            <!-- cards -->
+            <b-container class="card-style-pc shadow">
+              <b-row class="m-0">
+                <!-- imagen de portada -->
+                <b-col>
+                  <b-img :src="pub.portada" class="img-size-pc"></b-img>
+                </b-col>
+
+                <!-- info del producto -->
+                <b-col cols="8">
+                  <!-- titulo y precio -->
+                  <b-row class="mt-3 text-left">
+                    <b-col cols="8" style="font-size: 1.5rem; color: black; font-weight: bold;">
+                      {{ pub.titulo }}
+                    </b-col>
+
+                    <b-col
+                      class="text-right"
+                      style="font-size: 1.5rem; color: #6c6f81"
+                    >
+                      ${{ pub.precio }}
+                    </b-col>
+                  </b-row>
+
+                  <b-row>
+                    <b-col class="text-left" style="font-size: 0.8rem">
+                      articulo disponible
+                    </b-col>
+                  </b-row>
+
+                  <b-row class="mt-3 text-left">
+                    <b-col cols="9">
+                      <b-button
+                        class="btn-comprar-pc mr-2"
+                        v-b-modal.modal-xl
+                        @click="set_datos_modal(key)"
+                      >
+                        Ver mas
+                      </b-button>
+
+                      <b-button class="btn-add"> Guardar </b-button>
+                    </b-col>
+
+                    <b-col>
+                      <b-button class="btn-corazon" variant="light">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="21"
+                          height="21"
+                          fill="currentColor"
+                          class="bi bi-heart-fill"
+                          viewBox="0 0 16 16"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
+                          />
+                        </svg>
+                      </b-button>
+                    </b-col>
+                  </b-row>
+
+                  <b-row class="mt-4 text-left">
+                    <b-col>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        fill="currentColor"
+                        class="bi bi-truck "
+                        viewBox="0 0 16 16"
+                      >
+                        <path
+                          d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5v-7zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456zM12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"
+                        />
+                      </svg>
+
+                      Envio gratis en todos los pedidos.
+                    </b-col>
+                  </b-row>
                 </b-col>
               </b-row>
             </b-container>
@@ -487,7 +574,7 @@ export default {
       options: [
         { value: "Ascendente", text: "Precio (Ascendente)" },
         { value: "Descendente", text: "Precio (Descendente)" },
-        {value: "N/A", text: "No ordenar" }
+        { value: "N/A", text: "No ordenar" },
       ],
 
       imagenes_publicacion: [],
@@ -496,7 +583,7 @@ export default {
 
   firestore: {
     publicaciones: db.collection("publicaciones"),
-    copia_publicaciones: db.collection("publicaciones")
+    copia_publicaciones: db.collection("publicaciones"),
   },
 
   methods: {
@@ -532,15 +619,13 @@ export default {
     },
 
     ordenar_precio(orden) {
-
       //let publicaciones_ordernadas = []
       let precios = [];
       let precios_ordenada = null;
-      let copia = this.publicaciones.slice()
+      let copia = this.publicaciones.slice();
 
       if (orden === "Ascendente") {
-
-        this.publicaciones = []
+        this.publicaciones = [];
 
         this.copia_publicaciones.forEach((element) => {
           precios.push(element.precio);
@@ -551,26 +636,18 @@ export default {
           return a - b;
         });
 
-       
-        //Aplicamos la busqueda para ordenar 
-        precios_ordenada.forEach(element => {
-
-          copia.forEach(element_publicaciones => {
-            if(element == element_publicaciones.precio){
-              this.publicaciones.push(element_publicaciones)
+        //Aplicamos la busqueda para ordenar
+        precios_ordenada.forEach((element) => {
+          copia.forEach((element_publicaciones) => {
+            if (element == element_publicaciones.precio) {
+              this.publicaciones.push(element_publicaciones);
             }
-          })
+          });
+        });
 
-        })
-
-
-
-        
-
-       //Ascendente
-      }else if(orden === 'Descendente'){
-
-        this.publicaciones = []
+        //Ascendente
+      } else if (orden === "Descendente") {
+        this.publicaciones = [];
 
         this.copia_publicaciones.forEach((element) => {
           precios.push(element.precio);
@@ -581,24 +658,17 @@ export default {
           return b - a;
         });
 
-        //Aplicamos la busqueda para ordenar 
-        precios_ordenada.forEach(element => {
-
-          copia.forEach(element_publicaciones => {
-            if(element == element_publicaciones.precio){
-              this.publicaciones.push(element_publicaciones)
+        //Aplicamos la busqueda para ordenar
+        precios_ordenada.forEach((element) => {
+          copia.forEach((element_publicaciones) => {
+            if (element == element_publicaciones.precio) {
+              this.publicaciones.push(element_publicaciones);
             }
-          })
-
-        })
-
-
-
-
-      }else{
-        this.publicaciones = this.copia_publicaciones
+          });
+        });
+      } else {
+        this.publicaciones = this.copia_publicaciones;
       }
-
     },
   },
 };
@@ -612,16 +682,43 @@ export default {
   --primary: #ffebc9;
 }
 
-.card-style {
-  height: 14.5rem;
-  transition: all 0.5s ease-in-out;
-  transform: scale(1);
+.btn-comprar-pc {
+  background-color: black;
+  color: white;
+  border-radius: 8px;
 }
 
-.card-style:hover {
-  height: 14.5rem;
-  transition: all 0.5s ease-in-out;
-  transform: scale(1.1);
+.btn-corazon {
+  background-color: white;
+  color: #6c6f81;
+  border-color: #6c6f81;
+  border-radius: 8px;
+}
+
+.btn-corazon:focus {
+  background-color: white;
+  box-shadow: none;
+  
+}
+
+.btn-add {
+  background-color: white;
+  color: black;
+  border-color: #6c6f81;
+  border-radius: 8px;
+}
+
+.card-style-pc {
+  position: relative;
+  padding: 0;
+  height: 12rem;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+
+.card-style-movil {
+  height: 13rem;
+  margin-bottom: 10px;
 }
 
 .img-size {
@@ -629,9 +726,14 @@ export default {
   height: 6.1rem;
 }
 
-.contenedor-imagen-card {
-  max-width: 14rem;
-  max-height: 6rem;
+.img-size-pc {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 9.9rem;
+  height: 12rem;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
 }
 
 .titulo-card {
@@ -685,7 +787,8 @@ export default {
 }
 
 .filtros-secundarios {
-  height: 2rem;
+  height: 1rem;
+  margin-bottom: 35px;
 }
 
 .labels-text {
@@ -717,13 +820,13 @@ export default {
   font-weight: bold;
 }
 
-.btn-fecha{
+.btn-fecha {
   background-color: white;
   width: 100px;
   border: 1px solid var(--gray);
 }
 
-.btn-fecha:hover{
+.btn-fecha:hover {
   border: 1px solid var(--dark);
 }
 </style>
