@@ -102,8 +102,6 @@
             "
           >
             <b-row>
-              <b-col>
-                <b-row>
                   <b-col class="filtro">
                     <b-row>
                       <b-col cols="4">
@@ -157,8 +155,6 @@
                       </b-col>
                     </b-row>
                   </b-col>
-                </b-row>
-              </b-col>
             </b-row>
           </b-col>
 
@@ -183,10 +179,11 @@
                     </b-row>
                   </b-col>
 
-                  <b-col>
+                  <b-col cols="6">
                     <b-row>
                       <b-col>
                         <b-form-select
+                          size="sm"
                           @change="ordenar_precio(state_ordernar_precio)"
                           v-model="state_ordernar_precio"
                           :options="options"
@@ -198,7 +195,7 @@
                   <b-col>
                     <b-row>
                       <b-col>
-                        <b-button size="sm" block>
+                        <b-button size="sm" variant="light" class="btn-fecha">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="16"
@@ -490,6 +487,7 @@ export default {
       options: [
         { value: "Ascendente", text: "Precio (Ascendente)" },
         { value: "Descendente", text: "Precio (Descendente)" },
+        {value: "N/A", text: "No ordenar" }
       ],
 
       imagenes_publicacion: [],
@@ -498,6 +496,7 @@ export default {
 
   firestore: {
     publicaciones: db.collection("publicaciones"),
+    copia_publicaciones: db.collection("publicaciones")
   },
 
   methods: {
@@ -532,14 +531,18 @@ export default {
         });
     },
 
-    ordenar_precio(Ascendente) {
+    ordenar_precio(orden) {
+
       //let publicaciones_ordernadas = []
       let precios = [];
       let precios_ordenada = null;
-      this.copia_publicaciones = this.publicaciones.slice()
+      let copia = this.publicaciones.slice()
 
-      if (Ascendente === "Descendente") {
-        this.publicaciones.forEach((element) => {
+      if (orden === "Ascendente") {
+
+        this.publicaciones = []
+
+        this.copia_publicaciones.forEach((element) => {
           precios.push(element.precio);
         });
 
@@ -548,32 +551,54 @@ export default {
           return a - b;
         });
 
-        console.log()
-
-
        
-        this.publicaciones = []
-
+        //Aplicamos la busqueda para ordenar 
         precios_ordenada.forEach(element => {
-            this.copia_publicaciones.forEach(element2 => {
-              if(element === element2.precio){
-                this.publicaciones.push(element2)
-              }
-            })
+
+          copia.forEach(element_publicaciones => {
+            if(element == element_publicaciones.precio){
+              this.publicaciones.push(element_publicaciones)
+            }
+          })
+
         })
 
+
+
+        
+
        //Ascendente
-      }else{
-        this.publicaciones.forEach((element) => {
+      }else if(orden === 'Descendente'){
+
+        this.publicaciones = []
+
+        this.copia_publicaciones.forEach((element) => {
           precios.push(element.precio);
         });
 
+        //tenemos los precios ordenados
         precios_ordenada = precios.sort((a, b) => {
           return b - a;
         });
+
+        //Aplicamos la busqueda para ordenar 
+        precios_ordenada.forEach(element => {
+
+          copia.forEach(element_publicaciones => {
+            if(element == element_publicaciones.precio){
+              this.publicaciones.push(element_publicaciones)
+            }
+          })
+
+        })
+
+
+
+
+      }else{
+        this.publicaciones = this.copia_publicaciones
       }
 
-      console.log(precios_ordenada);
     },
   },
 };
@@ -690,5 +715,15 @@ export default {
   font-size: 2rem;
   color: var(--gray);
   font-weight: bold;
+}
+
+.btn-fecha{
+  background-color: white;
+  width: 100px;
+  border: 1px solid var(--gray);
+}
+
+.btn-fecha:hover{
+  border: 1px solid var(--dark);
 }
 </style>
