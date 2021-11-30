@@ -13,7 +13,7 @@
             </b-button>
 
             <b-button v-b-toggle.collapse-2 variant="secondary"
-              >Filtros
+              >Filtrar por:
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -226,7 +226,7 @@
             class="d-block d-lg-none d-xl-none d-xxl-none"
           >
             <!-- cards -->
-            <b-container class="card-style-pc shadow">
+            <b-container class="card-style-movil shadow mt-2">
               <b-row class="contenedor-imagen-card">
                 <b-col>
                   <b-img
@@ -259,6 +259,7 @@
                 <b-col>
                   <b-button
                     size="sm"
+                    block
                     variant="light"
                     class="btn-style"
                     v-b-modal.modal-xl
@@ -281,12 +282,6 @@
                     </svg>
                     Ver mas</b-button
                   >
-                </b-col>
-                <b-col
-                  cols="5"
-                  class="d-none d-lg-block d-xl-block d-xxl-block"
-                >
-                  <label for="" class="time-publicacion">Hace 5 min</label>
                 </b-col>
               </b-row>
             </b-container>
@@ -313,7 +308,10 @@
                 <b-col cols="8">
                   <!-- titulo y precio -->
                   <b-row class="mt-3 text-left">
-                    <b-col cols="8" style="font-size: 1.5rem; color: black; font-weight: bold;">
+                    <b-col
+                      cols="8"
+                      style="font-size: 1.5rem; color: black; font-weight: bold"
+                    >
                       {{ pub.titulo }}
                     </b-col>
 
@@ -370,7 +368,7 @@
                         width="20"
                         height="20"
                         fill="currentColor"
-                        class="bi bi-truck "
+                        class="bi bi-truck"
                         viewBox="0 0 16 16"
                       >
                         <path
@@ -395,10 +393,17 @@
           </b-col>
         </b-row>
         <b-row>
-          <b-col>
+          <b-col class="d-none d-lg-block d-xl-block d-xxl-block">
             <b-img
               src="../assets/undraw_no_data_re_kwbl.svg"
               width="400"
+            ></b-img>
+          </b-col>
+
+          <b-col class="d-block d-lg-none d-xl-none d-xxl-none">
+            <b-img
+              src="../assets/undraw_no_data_re_kwbl.svg"
+              width="300"
             ></b-img>
           </b-col>
         </b-row>
@@ -407,7 +412,12 @@
 
     <!-- modal del producto -->
 
-    <b-modal id="modal-xl" size="xl" hide-footer>
+    <b-modal
+      id="modal-xl"
+      :title="anuncio_seleccionado.titulo"
+      size="xl"
+      hide-footer
+    >
       <b-row>
         <!--  carousel del anuncio -->
         <b-col cols="12" lg="6" xl="6">
@@ -416,39 +426,57 @@
 
         <!--  datos del usuario y-->
         <b-col cols="12" lg="6" xl="6">
-          <b-row class="text-center mt-3">
-            <b-col class="titulo_anuncio">
-              {{ anuncio_seleccionado.titulo }}
+          <b-row class="text-left mt-3">
+            <b-col style="font-size: 4rem; color: #b4846c ">
+              $ {{ anuncio_seleccionado.precio }}
             </b-col>
           </b-row>
 
-          <b-row class="text-center mt-3">
-            <b-col> $ {{ anuncio_seleccionado.precio }} </b-col>
+          <b-row class="mt-3 ">
+            <b-col class="persona">
+              Vendedor: <span style="font-size: 1rem ; margin-left: 1rem">{{ anuncio_seleccionado.vendedor }}</span>
+            </b-col>
+            <b-col class="persona">
+              Telefono: <span style="font-size: 1rem ; margin-left: 1rem">{{ anuncio_seleccionado.telefono }}</span>
+            </b-col>
           </b-row>
 
-          <b-row class="d-none d-lg-block d-xl-block">
+          <b-row class="d-none d-lg-block d-xl-block mt-3">
             <b-col>
-              <b-button> COMPRAR </b-button>
+              <b-button block variant="light" class="btn-comprar-modal">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-wallet"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M0 3a2 2 0 0 1 2-2h13.5a.5.5 0 0 1 0 1H15v2a1 1 0 0 1 1 1v8.5a1.5 1.5 0 0 1-1.5 1.5h-12A2.5 2.5 0 0 1 0 12.5V3zm1 1.732V12.5A1.5 1.5 0 0 0 2.5 14h12a.5.5 0 0 0 .5-.5V5H2a1.99 1.99 0 0 1-1-.268zM1 3a1 1 0 0 0 1 1h12V2H2a1 1 0 0 0-1 1z"
+                  />
+                </svg>
+                COMPRAR
+              </b-button>
             </b-col>
           </b-row>
 
-          <b-row class="mt-3 ml-2">
-            <b-col> Vendedor: {{ anuncio_seleccionado.vendedor }} </b-col>
-            <b-col> Telefono: {{ anuncio_seleccionado.telefono }} </b-col>
+          <b-row class="d-none d-lg-block d-xl-block mt-3">
+            <b-form-rating v-model="value" variant="warning" class="mb-2"></b-form-rating>
           </b-row>
         </b-col>
       </b-row>
 
-      <b-row class="text-center mt-5">
+      <b-row class="text-center mt-5 shadow">
         <b-col
           cols="12 "
-          class="mt-5 mb-3 d-none d-lg-block d-xl-block d-xxl-block"
+          class="mt-5 mb-3 d-none d-lg-block d-xl-block d-xxl-block descripcion-label"
           >DESCRIPCION Y ESPECIFICACIONES</b-col
         >
 
         <!-- especificaciones -->
         <b-col cols="12" lg="6" xl="6" class="text-left">
-          <b-row class="shadow mr-1 ml-1 pt-2 pb-2 mb-3">
+          <b-row class="mr-1 ml-1 pt-2 pb-2 mb-3">
             <b-col class="ml-5">
               <b-row>
                 <b-col> Estado: </b-col>
@@ -512,7 +540,7 @@
         </b-col>
 
         <b-col cols="12" lg="6" xl="6" class="mb-3">
-          <b-row class="shadow mr-1 ml-1 pt-2 pb-2">
+          <b-row class="mr-1 ml-1 pt-2 pb-2">
             <b-col>
               {{ anuncio_seleccionado.descripcion }}
             </b-col>
@@ -578,6 +606,7 @@ export default {
       ],
 
       imagenes_publicacion: [],
+      value: 4.5,
     };
   },
 
@@ -683,7 +712,7 @@ export default {
 }
 
 .btn-comprar-pc {
-  background-color: black;
+  background-color: var(--gray);
   color: white;
   border-radius: 8px;
 }
@@ -695,10 +724,25 @@ export default {
   border-radius: 8px;
 }
 
+.btn-comprar-modal{
+  border: 1px solid #b4846c;
+  color: #b4846c;
+}
+
+.btn-comprar-modal:hover{
+  border: 1px solid #b4846c;
+  background-color: #b4846c;
+  color: white;
+}
+
 .btn-corazon:focus {
   background-color: white;
   box-shadow: none;
-  
+}
+
+.descripcion-label{
+  font-size: 2rem;
+  font-weight: bold;
 }
 
 .btn-add {
@@ -717,7 +761,7 @@ export default {
 }
 
 .card-style-movil {
-  height: 13rem;
+  height: 15rem;
   margin-bottom: 10px;
 }
 
@@ -742,7 +786,7 @@ export default {
 }
 
 .label-precio {
-  color: #b4846c;
+  color: #6c757d
 }
 
 .btn-style {
@@ -828,5 +872,11 @@ export default {
 
 .btn-fecha:hover {
   border: 1px solid var(--dark);
+}
+
+.persona {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #b4846c;
 }
 </style>
